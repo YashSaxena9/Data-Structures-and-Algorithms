@@ -3,7 +3,7 @@ public class quickSort {
     public static Scanner scn = new Scanner(System.in);
     public static void main(String[] args) {
         int[] arr = {8,1,3,4,7,9,6,4,5,2,1,-4,-9,2,1,3,1,5,4,44,55,99,-7,-99};
-        
+    
         // int[] arr={0};
         // quickSort_(arr, 0, arr.length - 1);
         // display(arr);
