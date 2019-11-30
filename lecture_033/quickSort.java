@@ -6,12 +6,12 @@ public class quickSort {
     
         // int[] arr={0};
         // quickSort_(arr, 0, arr.length - 1);
-        // display(arr);
-        // long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         // int[] arr = new int[100000];
         quickSort_(arr, 0, arr.length - 1);
-        // long end = System.currentTimeMillis();
-        // System.out.println(end - start);
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+        display(arr);
     }
     
     public static void display(int[] arr) {

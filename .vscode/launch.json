@@ -1,0 +1,12 @@
+{
+    "configurations": [
+    
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - quickSort",
+            "request": "launch",
+            "mainClass": "quickSort",
+            "projectName": "PepCoding_b5a52571"
+        }
+    ]
+}
