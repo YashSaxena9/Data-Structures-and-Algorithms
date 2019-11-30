@@ -23,8 +23,7 @@ void arrSum(vector <int> arr1, vector <int> arr2) {
 		itr3--;
 		itr2--;
 		itr1--;
-	}
-	while ( itr1 >= 0) {
+		while ( itr1 >= 0) {
 		int ans = arr1[itr1] + carry;
 		int rem = ans % 10;
 		carry = ans / 10;

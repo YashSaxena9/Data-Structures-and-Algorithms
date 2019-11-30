@@ -34,7 +34,7 @@ void decre_(int num1, int num2) {
 int printDecre_(int num, int lim) {
 	if (num == lim) {
 		cout<<num<<endl;
-		return num;
+	Preturn num;
 	}
 	int recAns = printDecre_(num + 1, lim);
 	cout<<recAns - 1<<endl;
