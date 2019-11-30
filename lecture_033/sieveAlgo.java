@@ -11,10 +11,10 @@ public class sieveAlgo {
     public static void sieve_allPrime(boolean[] arr) {
         for (int i = 2; i <= Math.sqrt(arr.length); i++) {
             if (!arr[i]) {
-                int num = i;
-                while (num < arr.length) {
-                    num * 
-                }
+                // int num = i;
+                // while (num < arr.length) {
+                    // num * 
+                // }
             }
         }
     }
