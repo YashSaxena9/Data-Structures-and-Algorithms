@@ -18,7 +18,7 @@ public class quickSort {
         for (int ele : arr) {
             System.out.print(ele + " ");
         }
-        System.out.println();
+        System.out.println(); 
     }
 
     public static void swap_(int[] arr, int idx1, int idx2) {
