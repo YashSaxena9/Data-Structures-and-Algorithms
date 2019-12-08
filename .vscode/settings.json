@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "list": "cpp"
-    }
+    },
+    "java.dependency.packagePresentation": "flat"
 }

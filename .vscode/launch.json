@@ -1,12 +1,421 @@
 {
-    "configurations": [
-    
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - quickSort",
-            "request": "launch",
-            "mainClass": "quickSort",
-            "projectName": "PepCoding_b5a52571"
-        }
-    ]
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Debug (Launch) - Current File",
+			"request": "launch",
+			"mainClass": "${file}"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-doubt<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "OOPS.doubt",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-test<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "OOPS.yash.test",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-addSubArray<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "addSubArray",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-Hello<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_001.Hello",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-largestofthree<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_001.largestofthree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-oddeven<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_001.oddeven",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-simpleInterest<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_001.simpleInterest",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-N_numbers<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.N_numbers",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-fibonacci<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.fibonacci",
+			"projectName": "PepCoding_2ec1393d",
+			"console": "integratedTerminal"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-patternsPro<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.patternsPro",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-primeNumber<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.primeNumber",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques1<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.ques1",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques2<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.ques2",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-tableOfTwo<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_002.tableOfTwo",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-crossPatt<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_003.crossPatt",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-fiboTriangle<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_003.fiboTriangle",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-hollowDiamond<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_003.hollowDiamond",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-pascalTriangle<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_003.pascalTriangle",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-pattDecDiamond<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_003.pattDecDiamond",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-arrayBasic<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_005.arrayBasic",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-binarySearch<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_005.binarySearch",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-createLarNum<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_006.createLarNum",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-dutchFlag0123<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_006.dutchFlag0123",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-dutchFlag0123<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_006.practice.javaCodes.dutchFlag0123",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques1<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_006.practice.javaCodes.ques1",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques2<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_006.practice.javaCodes.ques2",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques1<PepCoding_2ec1393d>(2)",
+			"request": "launch",
+			"mainClass": "lecture_006.ques1",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques2<PepCoding_2ec1393d>(2)",
+			"request": "launch",
+			"mainClass": "lecture_006.ques2",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-ques3<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_006.ques3",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-arrayAddSub<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_007.arrayAddSub",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-primeNumber<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_007.primeNumber",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-subArray<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_007.subArray",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-multiDimArray<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_008.multiDimArray",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-spiralPrint<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_008.spiralPrint",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-wavePrint<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_008.wavePrint",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-exitPoint<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_009.exitPoint",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-matrixMath<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_009.matrixMath",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-matrixExtended<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_010.matrixExtended",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-recursion_basic<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_011.recursion_basic",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-towerOfHanoi<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_011.towerOfHanoi",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-treePath<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_011.treePath",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-recuArr<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_012.recuArr",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-recSubSeq<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_013.recSubSeq",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-shoePair<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_013.shoePair",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-revRec<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_014.revRec",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-mazePathPlus<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_015.mazePathPlus",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-client<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_023.client",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-BTree<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_024.BTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-BTree<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_025.BTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-BTree<PepCoding_2ec1393d>(2)",
+			"request": "launch",
+			"mainClass": "lecture_026.BTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-BTree<PepCoding_2ec1393d>(3)",
+			"request": "launch",
+			"mainClass": "lecture_027.BTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-AVL_Tree<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_030.AVL_Tree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-genTree<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_031.genTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-genTree<PepCoding_2ec1393d>(1)",
+			"request": "launch",
+			"mainClass": "lecture_032.genTree",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-mergeSort<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_033.mergeSort",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-quickSort<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_033.quickSort",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-sieveAlgo<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_033.sieveAlgo",
+			"projectName": "PepCoding_2ec1393d"
+		},
+		{
+			"type": "java",
+			"name": "Debug (Launch)-timeComplex<PepCoding_2ec1393d>",
+			"request": "launch",
+			"mainClass": "lecture_034.timeComplex",
+			"projectName": "PepCoding_2ec1393d"
+		}
+	]
 }

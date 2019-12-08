@@ -1,5 +1,5 @@
 //  fibonacci series
-
+package lecture_002;
 import java.util.Scanner;
 
 public class fibonacci{
