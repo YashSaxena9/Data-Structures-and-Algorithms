@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-void display(vector <int> &arr) {
+void display(vector<int> &arr) {
 	for (int i : arr) {
 		cout<<i<<" ";
 	}
