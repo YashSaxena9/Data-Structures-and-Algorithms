@@ -57,7 +57,7 @@ public class addSubArray {
 		int[] sum_ = new int[itr3];
 
 		while (itr1 >= 0 && itr2 >= 0) {
-			int ans = arr1[itr1] - arr2[itr2] + borrow*10;
+			int ans = arr1[itr1] - arr2[itr2] + borrow * 10;
 			int rem = ans % 10;
 			borrow = ans / 10;
 			sum_[itr3] = rem;
