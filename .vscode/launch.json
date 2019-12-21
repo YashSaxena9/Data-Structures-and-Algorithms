@@ -1,12 +1,14 @@
 {
     "configurations": [
-    
+
         {
             "type": "java",
-            "name": "CodeLens (Launch) - quickSort",
+            "name": "Launch",
             "request": "launch",
-            "mainClass": "quickSort",
-            "projectName": "PepCoding_b5a52571"
+            "mainClass": "timeComplex",
+            "projectName": "PepCoding_b5a52571",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/lecture_034",
         }
     ]
 }

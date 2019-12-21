@@ -4,14 +4,19 @@ public class timeComplex {
 
     public static Scanner scn = new Scanner(System.in);
     public static void main(String[] args) {
-        int[] arr = new int[10000];
-        long start = System.currentTimeMillis();
+        // int[] arr = new int[10000];
+        // long start = System.currentTimeMillis();
+        // arr = mergeSort(arr, 0, arr.length - 1);
+        // long mid = System.currentTimeMillis();
+        // bubbleSort(arr);
+        // long end = System.currentTimeMillis();
+        // System.out.println("merge : " + (mid - start));
+        // System.out.println("bubble : " + (end - mid));
+        int[] arr = {1,6,5,4,7,8,9,3,2,1,44,55,66,22,84,53,96,11,47};
         arr = mergeSort(arr, 0, arr.length - 1);
-        long mid = System.currentTimeMillis();
-        bubbleSort(arr);
-        long end = System.currentTimeMillis();
-        System.out.println("merge : " + (mid - start));
-        System.out.println("bubble : " + (end - mid));
+        for (int ar : arr) {
+            System.out.print(ar + " ");
+        }
     }
     
     //  ____ bubble sort _____
