@@ -5,7 +5,7 @@
 #include<string>
 using namespace std;
 
-bool isWord
+bool isWord;
 
 int wordBreak(vector<string> &dict, string statement, string ans) {
 	if (statement.length() == 0) {
