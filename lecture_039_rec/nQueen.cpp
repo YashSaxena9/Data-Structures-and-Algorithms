@@ -153,13 +153,15 @@ int nQueen_fastest(int rSize, int cSize, int row, int tnq, string ans) {
 }
 
 int main(int args, char**argv) {
-    vector<vector<bool>> arr(10, vector<bool> (10, false));
-    // cout << nqueen_Comb(arr, 0, 0, 4, "") << endl;
-    cout << nqueen_Comb(arr, 0, 0, 10, "") << endl;
-    // cout << nqueen_Perm(arr, 0, 4, "") << endl;
-    // cout << nQueen_btr(arr, 0, 4, "") << endl;
-    // cout << nQueen_fastest(4, 4, 0, 4, "") << endl;
-    cout << nQueen_fastest(10, 10, 0, 10, "") << endl;
+    vector<vector<bool>> arr(4, vector<bool> (4, false));
+    cout << nqueen_Comb(arr, 0, 0, 4, "") << endl;
+    cout << nqueen_Perm(arr, 0, 4, "") << endl;
+    cout << nQueen_btr(arr, 0, 4, "") << endl;
+    cout << nQueen_fastest(4, 4, 0, 4, "") << endl;
+    
+    // vector<vector<bool>> arr(10, vector<bool> (10, false));
+    // cout << nqueen_Comb(arr, 0, 0, 10, "") << endl;
+    // cout << nQueen_fastest(10, 10, 0, 10, "") << endl;
     cout << calls1 << " , " << calls2 << " , " << calls3 << endl;
     return 0;
 }
