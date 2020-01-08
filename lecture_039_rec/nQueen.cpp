@@ -105,7 +105,8 @@ int nQueen_btr(vector<vector<bool>> &board, int row, int tnq, string ans) {
 }
 
 //  ================== fastest ====================
-int row_fill = 0, col_fill = 0, diag1_fill = 0, diag2_fill = 0;
+int row_fill = 0, col_fill = 0;
+long diag1_fill = 0L, diag2_fill = 0L;
 bool isSafe_circle_btr(int cSize, int r, int c) {
     if ((row_fill & (1 << r))) {
         return false;   
@@ -152,11 +153,13 @@ int nQueen_fastest(int rSize, int cSize, int row, int tnq, string ans) {
 }
 
 int main(int args, char**argv) {
-    vector<vector<bool>> arr(4, vector<bool> (4, false));
+    vector<vector<bool>> arr(10, vector<bool> (10, false));
     // cout << nqueen_Comb(arr, 0, 0, 4, "") << endl;
+    cout << nqueen_Comb(arr, 0, 0, 10, "") << endl;
     // cout << nqueen_Perm(arr, 0, 4, "") << endl;
-    cout << nQueen_btr(arr, 0, 4, "") << endl;
-    cout << nQueen_fastest(4, 4, 0, 4, "") << endl;
-    cout << calls2 << " , " << calls3 << endl;
+    // cout << nQueen_btr(arr, 0, 4, "") << endl;
+    // cout << nQueen_fastest(4, 4, 0, 4, "") << endl;
+    cout << nQueen_fastest(10, 10, 0, 10, "") << endl;
+    cout << calls1 << " , " << calls2 << " , " << calls3 << endl;
     return 0;
 }

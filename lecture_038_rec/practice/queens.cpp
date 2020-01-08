@@ -69,8 +69,72 @@ int queen1D_perm_subSeq(int size, int vis, int vidx, int tnq, int qpsf, string a
 }
 
 //  ============ two D =============
-int queen2D_comb() {
-    
+int queen2D_comb(vector<vector<bool>> &board, int vidx, int qpsf, int tnq, string ans) {
+    if (qpsf == tnq) {
+        cout << ans << endl;
+        return 1;
+    }
+    int count = 0;
+    for (int i = vidx; i < board.size() * board[0].size(); i++) {
+        int r = i / board[0].size();
+        int c = i % board[0].size();
+        count += queen2D_comb(board, i + 1, qpsf + 1, tnq, ans + "(" + to_string(r) + "," + to_string(c) + ")" + to_string(qpsf) + " ");
+    }
+    return count;
+}
+
+int queen2D_comb_subSeq(vector<vector<bool>> &board, int vidx, int qpsf, int tnq, string ans) {
+    if (vidx == board.size() * board[0].size() || qpsf >= tnq) {
+        if (qpsf == tnq) {
+            cout << ans << endl;
+            return 1;
+        }
+        return 0;
+    }
+    int count = 0;
+    int r = vidx / board[0].size();
+    int c = vidx % board[0].size();
+    count += queen2D_comb_subSeq(board, vidx + 1, qpsf + 1, tnq, ans + "(" + to_string(r) + "," + to_string(c) + ")" + to_string(qpsf) + " ");
+    count += queen2D_comb_subSeq(board, vidx + 1, qpsf, tnq, ans);
+    return count;
+}
+
+int queen2D_perm(vector<vector<bool>> &board, int qpsf, int tnq, string ans) {
+    if (qpsf == tnq) {
+        cout << ans << endl;
+        return 1;
+    }
+    int count = 0;
+    for (int i = 0; i < board.size() * board[0].size(); i++) {
+        int r = i / board[0].size();
+        int c = i % board[0].size();
+        if (!board[r][c]) {
+            board[r][c] = true;
+            count += queen2D_perm(board, qpsf + 1, tnq, ans + "(" + to_string(r) + "," + to_string(c) + ")" + to_string(qpsf) + " ");
+            board[r][c] =false;
+        }
+    }
+    return count;
+}
+
+int queen2D_perm_subSeq(vector<vector<bool>> &board, int vidx, int qpsf, int tnq, string ans) {
+    if (vidx == board.size() * board[0].size() || qpsf >= tnq) {
+        if (qpsf == tnq) {
+            cout << ans << endl;
+            return 1;
+        }
+        return 0;
+    }
+    int count = 0;
+    int r = vidx / board[0].size();
+    int c = vidx % board[0].size();
+    if (!board[r][c]) {
+        board[r][c] = true;
+        count += queen2D_perm_subSeq(board, 0, qpsf + 1, tnq, ans + "(" + to_string(r) + "," + to_string(c) + ")" + to_string(qpsf) + " ");
+        board[r][c] =false;
+    }
+    count += queen2D_perm_subSeq(board, vidx + 1, qpsf, tnq, ans);
+    return count;
 }
 
 //  ========== main ==========
@@ -82,7 +146,16 @@ void oneD(int size, int tnq) {
     // cout << queen1D_perm_subSeq(size, 0, 0, tnq, 0, "") << endl;
 }
 
+void twoD(int row, int col, int tnq) {
+    vector<vector<bool>> arr(row, vector<bool> (col, false));
+    // cout << queen2D_comb(arr, 0, 0, 4, "") << endl;
+    // cout << queen2D_comb_subSeq(arr, 0, 0, 4, "") << endl;
+    // cout << queen2D_perm(arr, 0, 4, "") << endl;
+    // cout << queen2D_perm_subSeq(arr, 0, 0, 4, "") << endl;
+}
+
 int main(int args, char**argv) {
     oneD(5, 3);
+    twoD(4, 4, 4);
     return 0;
 }
