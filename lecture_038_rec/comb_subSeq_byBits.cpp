@@ -35,12 +35,12 @@ int with_subSeq(vector<char> &arr, int vidx, string ans) {
 
 //  no recursion
 int with_bits(vector<char> &arr) {
-    int total = pow(2, arr.size());
+    int total = 1<<arr.size();
     for (int i = 0; i < total; i++) {
         string ans = "";
         for (int j = 0; j < arr.size(); j++) {
             if (i & (1 << j)) {
-                ans = arr[arr .size() - j - 1] + ans;
+                ans += arr[arr .size() - j - 1];
             }
         }
         cout << "[" << ans << "]" << endl;
