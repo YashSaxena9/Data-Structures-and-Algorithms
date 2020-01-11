@@ -1,6 +1,12 @@
 {
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - subsetSum",
+            "request": "launch",
+            "mainClass": "subsetSum",
+            "projectName": "PepCoding_eedd07c9"
+        },
         {
             "type": "java",
             "name": "Launch",
@@ -8,7 +14,7 @@
             "mainClass": "timeComplex",
             "projectName": "PepCoding_b5a52571",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/lecture_034",
+            "cwd": "${workspaceFolder}/lecture_034"
         }
     ]
 }
