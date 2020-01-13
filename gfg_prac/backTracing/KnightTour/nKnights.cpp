@@ -21,11 +21,12 @@ bool nKnight(long board, int rSize, int cSize, int row, int col, int fillCount) 
     // vector<int> dir1 = {2, 2, -2, -2, 1, -1, 1, -1};
     // vector<int> dir2 = {1, -1, 1, -1, 2, 2, -2, -2};
     
-    vector<int> dir1 = {2, 1, -1, -2, -2, -1, 1, 2}; 
-    vector<int> dir2 = {1, 2, 2, 1, -1, -2, -2, -1}; 
-    for (int i = 0; i < dir1.size(); i++) {
-        int r = row + dir1[i];
-        int c = col + dir2[i];
+    // vector<int> dir1 = {2, 1, -1, -2, -2, -1, 1, 2}; 
+    // vector<int> dir2 = {1, 2, 2, 1, -1, -2, -2, -1}; 
+    vector<vector<int>> dir = {{2,1}, {1,2}, {-1,2},{-2,1}, {-2,-1}, {-1,-2},{1,-2},{2,-1}};
+    for (int i = 0; i < dir.size(); i++) {
+        int r = row + dir[i][0];
+        int c = col + dir[i][1];
         if (isSafe(board, rSize, cSize, r, c)) {
             board |= (1 << ((row * cSize) + col));
             if (nKnight(board, rSize, cSize, r, c, fillCount + 1)) {
