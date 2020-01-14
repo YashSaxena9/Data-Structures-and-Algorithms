@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 /**
  * graph
  */
 public class graph {
-
+    
     //  ----------------- graph -------------------
     public static ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
     
@@ -13,6 +14,7 @@ public class graph {
         // removeEdge(4, 5);
         removeVertex(3);
         display();
+        queue<Edge> arr = new LinkedList<>();
     }
     public static void constructGraph() {
         int tot_vert = 7;       //  size of graph
