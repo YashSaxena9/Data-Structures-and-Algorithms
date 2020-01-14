@@ -178,7 +178,94 @@ int getConnectedComp() {
     return comp;
 }
 
+void bfs1(int src, int dest) {
+    queue<int> que;
+    que.push(src);
+    que.push(-1);
+    vector<bool> vis(graph.size(), false);
+    int lvl = 0, cycles = 0;
+    while (que.size() != 1) {
+        int rvtx = que.front();
+        que.pop();
+        if (vis[rvtx]) {
+            cout << "cycles : " << ++cycles << " @ " << rvtx << endl;
+            continue;
+        }
+        if (rvtx == dest) {
+            cout << "goal(no. of verteces to dest) : " << lvl << endl;
+        }
+        vis[rvtx] = true;
+        for (Edge* e : graph[rvtx]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+            }
+        }
+        if (que.front() == -1) {
+            lvl++;
+            que.pop();
+            que.push(-1);
+        }
+    }
+}
 
+void bfs1_corrected(int src, int dest) {
+    queue<int> que;
+    que.push(src);
+    que.push(-1);
+    vector<bool> vis(graph.size(), false);
+    int lvl = 0, cycles = 0;
+    while (que.size() > 1) {
+        int rvtx = que.front();
+        que.pop();
+        if (rvtx == -1) {
+            lvl++;
+            que.push(-1);
+            continue;
+        }
+        if (vis[rvtx]) {
+            cout << "cycles : " << ++cycles << " @ " << rvtx << endl;
+            continue;
+        }
+        if (rvtx == dest) {
+            cout << "goal(no. of vertices to dest) : " << lvl << endl;
+        }
+        vis[rvtx] = true;
+        for (Edge* e : graph[rvtx]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+            }
+        }
+    }
+}
+
+void bfs2(int src, int dest) {
+    queue<int> que;
+    vector<bool> vis(graph.size(), false);
+    que.push(src);
+    bool isDest = false;
+    int cycle = 0, level = 0;
+    while (que.size() != 0) {
+        int size = que.size();
+        while (size-- > 0) {
+            int rvtx = que.front();
+            que.pop();
+            if (vis[rvtx]) {
+                cout << "cycle: " << ++cycle << " @ " << rvtx << endl;
+                continue;
+            }
+            if (rvtx == dest && !isDest) {
+                cout << "goal(no. of vertices to dest) : " << level << endl;
+                isDest = true;
+            }
+            vis[rvtx] = true;
+            for (Edge *e : graph[rvtx])
+                if (!vis[e->v]) {
+                    que.push(e->v);
+                }
+        }
+        level++;
+    }
+}
 
 int main(int args, char**argv) {
     constructGraph();
@@ -187,17 +274,21 @@ int main(int args, char**argv) {
     // removeVertex(3);
     // display();
 
-    vector<bool> vis1(graph.size(), false);
-    hasPath(0, 6, vis1, 0, to_string(0) + " -> ");
+    // vector<bool> vis1(graph.size(), false);
+    // hasPath(0, 6, vis1, 0, to_string(0) + " -> ");
 
-    vector<bool> vis2(graph.size(), false);
-    cout << "\n" << allPath(0, 6, vis2, 0, to_string(0)) << endl;
+    // vector<bool> vis2(graph.size(), false);
+    // cout << "\n" << allPath(0, 6, vis2, 0, to_string(0)) << endl;
     
-    vector<bool> vis3(graph.size(), false);
-    allSolutions(0, 6, vis3, 0, to_string(0));
-    cout << lightPath << " @ " << swsf << endl;
-    cout << heavyPath << " @ " << lwsf << endl;
+    // vector<bool> vis3(graph.size(), false);
+    // allSolutions(0, 6, vis3, 0, to_string(0));
+    // cout << lightPath << " @ " << swsf << endl;
+    // cout << heavyPath << " @ " << lwsf << endl;
 
-    cout << getConnectedComp() << endl;
+    // cout << getConnectedComp() << endl;
+
+    // bfs1(0, 6);
+    // bfs1_corrected(0, 6);
+    // bfs2(0, 6);
     return 0;
 }
