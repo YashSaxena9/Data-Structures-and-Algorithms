@@ -84,22 +84,6 @@ void removeVertex(int u) {
     // graph.erase(graph.begin() + u);         //  in c++
 }
 
-//  ----------- main -------------
-void constructGraph() {
-    int tot_vert = 7;
-    for (int i = 0; i < tot_vert; i++) {
-        graph.push_back(vector<Edge*>());
-    }
-    addEdge(0, 1, 10);
-    addEdge(0, 3, 10);
-    addEdge(1, 2, 10);
-    addEdge(2, 3, 40);
-    addEdge(3, 4, 2);
-    addEdge(4, 5, 2);
-    addEdge(4, 6, 3);
-    addEdge(5, 6, 8);
-}
-
 bool hasPath(int src, int dest, vector<bool> &vis, int wsf, string path) {
     if (src == dest) {
         cout << path << " @ " << wsf << endl;       //  wsf = weight so far
@@ -267,6 +251,47 @@ void bfs2(int src, int dest) {
     }
 }
 
+//  hamiltonian path
+int hamiltonianPath(int start, int head, int size, vector<bool> &vis, string ans) {
+    if (size == graph.size() - 1) {
+        for (Edge* e : graph[start]) {
+            if (e->v == head) {
+                ans += " " + to_string(e->v);
+                cout << "cycle" << endl;
+            }
+        }
+        cout << ans << endl;
+        return 1;
+    }
+    vis[start] = true;
+    int count = 0;
+    for (Edge* e : graph[start]) {
+        if (!vis[e->v]) {
+            count += hamiltonianPath(e->v, head, size + 1, vis, ans + " " + to_string(e->v));
+        }
+    }
+    vis[start] = false;
+    return count;
+}
+
+//  ----------- main -------------
+void constructGraph() {
+    int tot_vert = 7;
+    for (int i = 0; i < tot_vert; i++) {
+        graph.push_back(vector<Edge*>());
+    }
+    addEdge(0, 1, 10);
+    addEdge(0, 3, 10);
+    addEdge(1, 2, 10);
+    addEdge(2, 3, 40);
+    addEdge(3, 4, 2);
+    addEdge(4, 5, 2);
+    addEdge(4, 6, 3);
+    addEdge(5, 6, 8);
+    addEdge(6, 0, 100);
+    addEdge(2, 5, 100);
+}
+
 int main(int args, char**argv) {
     constructGraph();
     display();
@@ -290,5 +315,7 @@ int main(int args, char**argv) {
     // bfs1(0, 6);
     // bfs1_corrected(0, 6);
     // bfs2(0, 6);
+    vector<bool> vis4(graph.size(), false);
+    cout << hamiltonianPath(0, 0, 0, vis4, to_string(0) + "");
     return 0;
 }
