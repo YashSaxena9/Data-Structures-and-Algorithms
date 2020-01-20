@@ -220,7 +220,15 @@ int getConnectedComp() {
     return comp;
 }
 
-void bfs1(int src, int dest) {
+void bfs_allInfo(int src, int dest) {
+    /*
+    * here this algo is a little wrong.
+    * we are checking the -1 presence after adding elements in que
+    * if there are repeated elements in que at same level and just before -1
+    * then it will continue at that repeated element and won't give -1 the chance of poping 
+    * out of the que.
+    * in next iteration of loop vis[rvtx] have -1 as rvtx and give exception
+    */
     queue<int> que;
     que.push(src);
     que.push(-1);
@@ -242,6 +250,8 @@ void bfs1(int src, int dest) {
                 que.push(e->v);
             }
         }
+        //  this should be placed before detecting cycle and increasing cycle count
+        //  it should have continue with itself when placed at right place
         if (que.front() == -1) {
             lvl++;
             que.pop();
@@ -250,7 +260,7 @@ void bfs1(int src, int dest) {
     }
 }
 
-void bfs1_corrected(int src, int dest) {
+void bfs_allInfo_corrected(int src, int dest) {
     queue<int> que;
     que.push(src);
     que.push(-1);
@@ -382,7 +392,7 @@ bool isBipartite_util_02(int src, vector<int> &vis) {
         que.pop();
         if (vis[front.first] != -1) {
             if (front.second != vis[front.first]) {
-                cout << "conflict : " << endl;
+                cout << "conflict : " << endl;           //  used to check no. of conflicts
                 flag = false;
             }
             continue;
@@ -404,6 +414,7 @@ bool isBipartite() {
     for (int i = 0; i < graph.size(); i++) {
         if (vis[i] == -1) {
             bool ans = isBipartite_util_01(i, vis);
+                    // bool ans = isBipartite_util_02(i, vis);
             flag = flag || ans;
             cout << count << " " << (boolalpha) << ans << endl;
             count++;
@@ -518,7 +529,7 @@ void topologicalSort_bfs() {
     cout << endl;
 }
 
-//  Kosa Raju Algo  for strongly connected components
+//  ---------- Kosa Raju Algo  for strongly connected components ------------
 vector<vector<Edge*>> inverseGraph() {
     vector<vector<Edge*>> invGraph(graph.size(), vector<Edge*>());
     for (int i = 0; i < graph.size(); i++) {
@@ -530,7 +541,54 @@ vector<vector<Edge*>> inverseGraph() {
     return invGraph;
 }
 
-/* ================================================ */
+void dfs_kosaRaju(int src, vector<bool> &vis, vector<int> &stack) {
+    vis[src] = true;
+    for (Edge* e : graph[src]) {
+        if (!vis[e->v]) {
+            dfs_kosaRaju(e->v, vis, stack);
+        }
+    }
+    stack.push_back(src);
+}
+
+//  simple dfs traversal
+void dfs_for_SCC(int src, vector<vector<Edge*>> &invGraph, vector<bool> &vis) {
+    vis[src] = true;
+    // cout << src << " ";
+    for (Edge* e : invGraph[src]) {
+        if (!vis[e->v]) {
+            dfs_for_SCC(e->v, invGraph, vis);
+        }
+    }
+}
+//  strongly connected components count
+int SCC_count() {
+    vector<bool> vis(graph.size(), false);
+    vector<int> stack;
+    for (int i = 0; i < graph.size(); i++) {
+        if (!vis[i]) {
+            dfs_kosaRaju(i, vis, stack);
+        }
+    }
+    vector<vector<Edge*>> invGraph = inverseGraph();
+    for (int i = 0; i < vis.size(); i++) {
+        vis[i] = false;
+    }
+    int count = 0;
+    while (stack.size() != 0) {
+        int vtx = stack.back();
+        if (!vis[vtx]) {
+            dfs_for_SCC(vtx, invGraph, vis);
+            count++;
+        }
+        stack.pop_back();
+    }
+    return count;
+}
+
+
+/* ========================================================== */
+
 //  ----------- main -------------
 void constructGraph() {
     int tot_vert = 10;
@@ -539,14 +597,14 @@ void constructGraph() {
     }
 
     //  graph 1
-    // addEdge(0, 1, 10);
-    // addEdge(0, 3, 10);
-    // addEdge(1, 2, 10);
-    // addEdge(2, 3, 40);
-    // addEdge(3, 4, 2);
-    // addEdge(4, 5, 2);
-    // addEdge(4, 6, 3);
-    // addEdge(5, 6, 8);
+    addEdge(0, 1, 10);
+    addEdge(0, 3, 10);
+    addEdge(1, 2, 10);
+    addEdge(2, 3, 40);
+    addEdge(3, 4, 2);
+    addEdge(4, 5, 2);
+    addEdge(4, 6, 3);
+    addEdge(5, 6, 8);
            // extra
     // addEdge(6, 0, 100);
     // addEdge(2, 5, 100);
@@ -580,22 +638,22 @@ void constructGraph() {
     // addEdge_uni(3, 5);
 
     // graph 5
-    addEdge_uni(0, 1);
-    addEdge_uni(1, 3);
-    addEdge_uni(3, 8);
-    addEdge_uni(8, 9);
-    addEdge_uni(9, 8);
-    addEdge_uni(2, 0);
-    addEdge_uni(1, 2);
-    addEdge_uni(2, 4);
-    addEdge_uni(4, 3);
-    addEdge_uni(2, 5);
-    addEdge_uni(6, 4);
-    addEdge_uni(5, 6);
-    addEdge_uni(5, 7);
-    addEdge_uni(3, 7);
-    addEdge_uni(7, 6);
-    addEdge_uni(7, 9);
+    // addEdge_uni(0, 1);
+    // addEdge_uni(1, 3);
+    // addEdge_uni(3, 8);
+    // addEdge_uni(8, 9);
+    // addEdge_uni(9, 8);
+    // addEdge_uni(2, 0);
+    // addEdge_uni(1, 2);
+    // addEdge_uni(2, 4);
+    // addEdge_uni(4, 3);
+    // addEdge_uni(2, 5);
+    // addEdge_uni(6, 4);
+    // addEdge_uni(5, 6);
+    // addEdge_uni(5, 7);
+    // addEdge_uni(3, 7);
+    // addEdge_uni(7, 6);
+    // addEdge_uni(7, 9);
 }
 
 int main(int args, char**argv) {
@@ -618,7 +676,7 @@ int main(int args, char**argv) {
 
     // cout << getConnectedComp() << endl;
 
-    // bfs1(0, 6);
+    bfs1(0, 6);
     // bfs1_corrected(0, 6);
     // bfs2(0, 6);
 
@@ -630,7 +688,9 @@ int main(int args, char**argv) {
     // topologicalSort_();
     // topologicalSort_btr();
     // topologicalSort_bfs();
-    inverseGraph();
+
+    // inverseGraph();
+    // cout << SCC_count();
     
     return 0;
 }
