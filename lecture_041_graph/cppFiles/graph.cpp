@@ -597,14 +597,14 @@ void constructGraph() {
     }
 
     //  graph 1
-    addEdge(0, 1, 10);
-    addEdge(0, 3, 10);
-    addEdge(1, 2, 10);
-    addEdge(2, 3, 40);
-    addEdge(3, 4, 2);
-    addEdge(4, 5, 2);
-    addEdge(4, 6, 3);
-    addEdge(5, 6, 8);
+    // addEdge(0, 1, 10);
+    // addEdge(0, 3, 10);
+    // addEdge(1, 2, 10);
+    // addEdge(2, 3, 40);
+    // addEdge(3, 4, 2);
+    // addEdge(4, 5, 2);
+    // addEdge(4, 6, 3);
+    // addEdge(5, 6, 8);
            // extra
     // addEdge(6, 0, 100);
     // addEdge(2, 5, 100);
@@ -638,22 +638,22 @@ void constructGraph() {
     // addEdge_uni(3, 5);
 
     // graph 5
-    // addEdge_uni(0, 1);
-    // addEdge_uni(1, 3);
-    // addEdge_uni(3, 8);
-    // addEdge_uni(8, 9);
-    // addEdge_uni(9, 8);
-    // addEdge_uni(2, 0);
-    // addEdge_uni(1, 2);
-    // addEdge_uni(2, 4);
-    // addEdge_uni(4, 3);
-    // addEdge_uni(2, 5);
-    // addEdge_uni(6, 4);
-    // addEdge_uni(5, 6);
-    // addEdge_uni(5, 7);
-    // addEdge_uni(3, 7);
-    // addEdge_uni(7, 6);
-    // addEdge_uni(7, 9);
+    addEdge_uni(0, 1);
+    addEdge_uni(1, 3);
+    addEdge_uni(3, 8);
+    addEdge_uni(8, 9);
+    addEdge_uni(9, 8);
+    addEdge_uni(2, 0);
+    addEdge_uni(1, 2);
+    addEdge_uni(2, 4);
+    addEdge_uni(4, 3);
+    addEdge_uni(2, 5);
+    addEdge_uni(6, 4);
+    addEdge_uni(5, 6);
+    addEdge_uni(5, 7);
+    addEdge_uni(3, 7);
+    addEdge_uni(7, 6);
+    addEdge_uni(7, 9);
 }
 
 int main(int args, char**argv) {
@@ -676,8 +676,8 @@ int main(int args, char**argv) {
 
     // cout << getConnectedComp() << endl;
 
-    bfs1(0, 6);
-    // bfs1_corrected(0, 6);
+    bfs_allInfo(0, 6);
+    // bfs_allInfo_corrected(0, 6);
     // bfs2(0, 6);
 
     // vector<bool> vis4(graph.size(), false);

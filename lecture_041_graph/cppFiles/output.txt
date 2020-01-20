@@ -1,14 +1,254 @@
-0 -> (1, 10) (3, 10) 
-1 -> (0, 10) (2, 10) 
-2 -> (1, 10) (3, 40) 
-3 -> (0, 10) (2, 40) (4, 2) 
-4 -> (3, 2) (5, 2) (6, 3) 
-5 -> (4, 2) (6, 8) 
-6 -> (4, 3) (5, 8) 
-7 -> 
-8 -> 
-9 -> 
-
-cycles : 1 @ 2
-goal(no. of verteces to dest) : 3
-cycles : 2 @ 6
+* [33mcommit a3e6d6c0a7f18d54f71be4aa49e1e53c680c89c3[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Mon Jan 20 22:34:39 2020 +0530
+[31m|[m 
+[31m|[m     graphs updated
+[31m|[m 
+* [33mcommit 8b6e4fbad1c7806a5a026045e14dace353acf09a[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sun Jan 19 23:17:20 2020 +0530
+[31m|[m 
+[31m|[m     cpp obj on heap
+[31m|[m 
+* [33mcommit f4b61c146439e5cc613338d0b8bb996e4e6e4156[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sun Jan 19 23:16:31 2020 +0530
+[31m|[m 
+[31m|[m     graphs modified
+[31m|[m 
+* [33mcommit cad5a2910f83bd6ac70069ec62c73aad517c2b3c[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sat Jan 18 18:14:44 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit 7a88d52e6ca3975da56e4ae8d4c13d318a8aa395[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sat Jan 18 17:25:28 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit 2f5b925e5d828e77ccf506a5a9fd194a199705f8[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 17:52:19 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit 7d8ea3b8eb073294c503e6656a1450fa45dd99d3[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 17:42:22 2020 +0530
+[31m|[m 
+[31m|[m     code seperated
+[31m|[m 
+* [33mcommit 7cd20e071ea3eae7c466f92d49b3056a2c2363b0[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 17:15:17 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit b65cbd5e6221d46a995361b607eb3daa61ece9ed[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 17:07:41 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit 36cc81bdf06b39f2ab952a321c12c24ba27acf24[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 13:23:19 2020 +0530
+[31m|[m 
+[31m|[m     graph modified
+[31m|[m 
+* [33mcommit 48dd9c012b0e1eccc09c79db43568d49c618e555[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Tue Jan 14 13:22:41 2020 +0530
+[31m|[m 
+[31m|[m     graph modified
+[31m|[m 
+* [33mcommit db5886e11fddf8a023dc25d996880eb3a7be86e3[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Mon Jan 13 14:56:52 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit 17026e7e1d53bb4766f6031df5d018819f95a219[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sat Jan 11 13:20:47 2020 +0530
+[31m|[m 
+[31m|[m     gfg practice
+[31m|[m 
+* [33mcommit bbe971a829a06aa626522a639573b954a54b8ec4[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Thu Jan 9 01:34:38 2020 +0530
+[31m|[m 
+[31m|[m     return and void type
+[31m|[m 
+* [33mcommit af6891727b5c183355fd1cbd4a30ed87054435af[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Thu Jan 9 01:26:31 2020 +0530
+[31m|[m 
+[31m|[m     return and void type
+[31m|[m 
+* [33mcommit 85acfcb85bd30f054194a480a641a316abf597f5[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Thu Jan 9 01:26:01 2020 +0530
+[31m|[m 
+[31m|[m     return and void type
+[31m|[m 
+* [33mcommit 3c05c4d1e2e11999ee4db4f0cf9ab19b13ac0730[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Wed Jan 8 14:25:31 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit e89c01115d668d42f594d1214c11f5162868116b[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Wed Jan 8 14:24:19 2020 +0530
+[31m|[m 
+[31m|[m     nQueen complete
+[31m|[m 
+* [33mcommit bcc7a325a7994adc3feb4093fcba5b24bbf454d0[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Wed Jan 8 13:28:37 2020 +0530
+[31m|[m 
+[31m|[m     nQueens revision
+[31m|[m 
+* [33mcommit 475d535715125b20d9f82c4297e706dd9238573b[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Mon Jan 6 16:13:35 2020 +0530
+[31m|[m 
+[31m|[m     comb and perm 8 imp. trees
+[31m|[m 
+* [33mcommit e8e5e4e5b0ea0ead95d0595e313191f28f49ddff[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sun Jan 5 16:55:27 2020 +0530
+[31m|[m 
+[31m|[m     modified
+[31m|[m 
+* [33mcommit de9b644988c7eb95a04741bbe2e99cc4598ca766[m
+[31m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[31m|[m Date:   Sat Jan 4 19:26:15 2020 +0530
+[31m|[m 
+[31m|[m     recursion revision
+[31m|[m   
+*   [33mcommit 5267ad2cc3646f2ee1e6945a02b462616c359073[m
+[32m|[m[33m\[m  Merge: eced821 1aa0a63
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Thu Jan 2 14:21:07 2020 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     modified
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 1aa0a63b4ae15258e3f983b93054aa442cddc4d2[m
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Mon Dec 9 12:14:17 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     suduko Modified
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 09d4ea75e2a5d7d0d2a6ac6f67ea9d6450fe72b1[m
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Mon Dec 9 12:13:18 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     modified
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit a2285d115f50e32ea172db939a9a8f1be9933836[m
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Mon Dec 9 12:04:04 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     modified
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 110db98510cbf6d41af5a07ab2e028346f15eac3[m
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Mon Dec 9 01:21:08 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     config.json added
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 761185c96d88f5ab17fef9f4caec401b0b42a536[m
+[32m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Sun Dec 8 23:42:42 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     minor change
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 4c29737ee79e5fdca17d2ac53642d46259b1dd4c[m
+[32m|[m [33m|[m Author: Yash <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Sun Dec 8 23:19:39 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     modified
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 964fa4dd052dbf5397183d7ababdec762c63af11[m
+[32m|[m [33m|[m Author: Yash <yashsaxena962000@gmail.com>
+[32m|[m [33m|[m Date:   Sun Dec 8 23:17:27 2019 +0530
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     modified
+[32m|[m [33m|[m 
+* [33m|[m [33mcommit eced821ff9c2c96b426f9b07d99b5d0e9e78a64a[m
+[33m|[m [33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m [33m|[m Date:   Thu Jan 2 14:19:33 2020 +0530
+[33m|[m [33m|[m 
+[33m|[m [33m|[m     graphs added
+[33m|[m [33m|[m 
+* [33m|[m [33mcommit bd83320f40c4aeb79006d6dc05b9c27ee2cd626f[m
+[33m|[m[33m/[m  Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m   Date:   Sat Dec 21 14:15:09 2019 +0530
+[33m|[m   
+[33m|[m       modified
+[33m|[m 
+* [33mcommit 4273bff31bece4103fa66fced344a7a35c94f060[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Mon Dec 2 17:12:49 2019 +0530
+[33m|[m 
+[33m|[m     added .gitignore
+[33m|[m 
+* [33mcommit 5a4b0e89cfcdb5f043a4c27dfa0dddcc9de494e0[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Mon Dec 2 17:10:19 2019 +0530
+[33m|[m 
+[33m|[m     updated
+[33m|[m 
+* [33mcommit fd6832b24547618c8648eb9b8653202487a53207[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Mon Dec 2 17:09:26 2019 +0530
+[33m|[m 
+[33m|[m     removed .class files
+[33m|[m 
+* [33mcommit aaf76540e8a1fcf40b218f97612fae54fa74edfe[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Mon Dec 2 17:07:37 2019 +0530
+[33m|[m 
+[33m|[m     questions added
+[33m|[m 
+* [33mcommit 837504989cc6f00b6dd3ce1a87f0672a2369b35d[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Sat Nov 30 22:22:38 2019 +0530
+[33m|[m 
+[33m|[m     modified
+[33m|[m 
+* [33mcommit 04c7b3c805f3a88f9248cce46a84ca09026b3851[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Sat Nov 30 21:19:19 2019 +0530
+[33m|[m 
+[33m|[m     modified
+[33m|[m 
+* [33mcommit 9144dfb274f42c4aac9fb1cb9fc7a9d2e60caf48[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Sat Nov 30 20:57:40 2019 +0530
+[33m|[m 
+[33m|[m     modified
+[33m|[m 
+* [33mcommit 8b32e9177e4a32526bc93efcdba64ec895358fef[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Sat Nov 30 20:55:43 2019 +0530
+[33m|[m 
+[33m|[m     modified
+[33m|[m 
+* [33mcommit 527a54fe4930fb5de96210042a739d842d511356[m
+[33m|[m Author: YashSaxena9 <yashsaxena962000@gmail.com>
+[33m|[m Date:   Wed Nov 27 00:10:40 2019 +0530
+[33m|[m 
+[33m|[m     modified
+[33m|[m 
+* [33mcommit 3c9a36406ed154c1b906d3f6c3f38da23f679ec3[m
+  Author: YashSaxena9 <yashsaxena962000@gmail.com>
+  Date:   Tue Nov 26 23:36:38 2019 +0530
+  
+      August Foundation (81) batch, PepCoding
+      Teacher : Rajneesh Kumar
+      ~ Yash Saxena
