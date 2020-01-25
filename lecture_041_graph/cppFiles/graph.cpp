@@ -9,6 +9,7 @@ using namespace std;
 //  ------------ Edge Class -------------
 class Edge {
 private:
+protected:
 public:
     int v = 0;
     int w = 0;
@@ -142,6 +143,43 @@ void removeVertex(int u) {
     // graph.erase(graph.begin() + u);         //  in c++
 }
 
+int totalEdges(bool isUniDir) {
+    int tot = 0;
+    for (int i = 0; i < graph.size(); i++) {
+        tot += graph[i].size();
+    }
+    if (isUniDir)   return tot;
+    return tot / 2;
+}
+
+void preOderPath(int src, int w, vector<bool> &vis, string ans) {
+    vis[src] = true; //mark.
+    cout << to_string(src) + " -> " + ans + to_string(src) + " @ " + to_string(w) << endl;
+
+    for (int i = 0; i < graph[src].size(); i++) {
+        int nbr = graph[src][i]->v;
+        int wt = graph[src][i]->w;
+        if (!vis[nbr])                                           //chek for vis
+            preOderPath(nbr, w + wt, vis, ans + to_string(src)); //call
+    }
+
+    vis[src] = false; //unmark.
+}
+
+void postOderPath(int src, int w, vector<bool> &vis, string ans) {
+    vis[src] = true; //mark.
+
+    for (int i = 0; i < graph[src].size(); i++) {
+        int nbr = graph[src][i]->v;
+        int wt = graph[src][i]->w;
+        if (!vis[nbr])                                           //chek for vis
+            postOderPath(nbr, w + wt, vis, ans + to_string(src)); //call
+    }
+
+    cout << to_string(src) + " -> " + ans + to_string(src) + " @ " + to_string(w) << endl;
+    vis[src] = false; //unmark.
+}
+
 bool hasPath(int src, int dest, vector<bool> &vis, int wsf, string path) {
     if (src == dest) {
         cout << path << " @ " << wsf << endl;       //  wsf = weight so far
@@ -177,6 +215,7 @@ string lightPath = "";
 int lwsf = 0;
 string heavyPath = "";
 
+//  for lightest and heaviest path by weight
 void allSolutions(int src, int des, vector<bool> &vis, int wsf, string path) {
     if (src == des) {
         if (wsf < swsf) {
@@ -198,13 +237,116 @@ void allSolutions(int src, int des, vector<bool> &vis, int wsf, string path) {
     vis[src] = false;
 }
 
+class WeiPath {
+    private :
+    public :
+        int weight = 0;
+        string path = "";
+
+        WeiPath(int weight, string path) {
+            this->weight = weight;
+            this->path = path;
+        }
+        
+        WeiPath(int weight) {
+            this->weight = weight;
+        }
+
+        WeiPath() {
+            //  default
+        }
+};
+
+WeiPath* lightestPath(int src, int des, vector<bool> &vis) {
+    if (src == des) {
+        WeiPath* base = new WeiPath(0, to_string(src));
+        return base;
+    }
+    vis[src] = true;
+    WeiPath* lp = new WeiPath(1e8);
+    for (Edge* e : graph[src]) {
+        if (!vis[e->v]) {
+            WeiPath* recLp = lightestPath(e->v, des, vis);
+            if (recLp->weight + e->w < lp->weight) {
+                lp->weight = recLp->weight + e->w;
+                lp->path = to_string(src) + " " + recLp->path;
+            }
+        }
+    }
+    vis[src] = false;
+    return lp;
+}
+
+WeiPath* heavyestPath(int src, int des, vector<bool> &vis) {
+    if (src == des) {
+        WeiPath* base = new WeiPath(0, to_string(src) + " ");
+        return base;
+    }
+    vis[src] = true;
+    WeiPath* hp = new WeiPath();
+    for (Edge* e : graph[src]) {
+        if (!vis[e->v]) {
+            WeiPath* rechp = heavyestPath(e->v, des, vis);
+            if (rechp->weight + e->w > hp->weight) {
+                hp->weight = rechp->weight + e->w;
+                hp->path = to_string(src) + " " + rechp->path;
+            }
+        }
+    }
+    vis[src] = false;
+    return hp;
+}
+//  simple dfs with recursion
 void dfs(int src, vector<bool> &vis) {
+    // cout << src << " ";          //  print ans
     vis[src] = true;
     for (Edge* e : graph[src]) {
         if (!vis[e->v]) {
             dfs(e->v, vis);
         }
     }
+}
+
+//  simple dfs without recursion
+void dfs_noRec(int src) {
+    vector<bool> vis(graph.size(), false);
+    vector<int> stack;
+    stack.push_back(src);
+    while (stack.size() != 0) {
+        int top = stack.back();
+        stack.pop_back();
+        if (vis[top]) {
+            continue;       //  vtx already added in stack
+        }
+        // cout << top << " ";          //  print ans
+        vis[top] = true;
+        for (Edge* e : graph[top]) {
+            if (!vis[e->v]) {
+                stack.push_back(e->v);
+            }
+        }
+        
+        /*
+        // to get output same as after using dfs by recursion
+        for (int i = graph[top].size() - 1; i >= 0; i--) {
+            Edge* e = graph[top][i];
+            if (!vis[e->v]) {
+                stack.push_back(e->v);
+            }
+        }
+        */
+    }
+}
+
+bool isConnectedGraph() {
+    vector<bool> vis(graph.size(), false);
+    dfs(0, vis);
+    for (bool flag : vis) {
+        if (!flag) {
+            return false;
+        }
+    }
+    return true;
 }
 
 //  tell about all connected graphs present in one graph
@@ -220,7 +362,52 @@ int getConnectedComp() {
     return comp;
 }
 
-void bfs_allInfo(int src, int dest) {
+//  simple bfs method 1
+void bfs1(int src) {
+    queue<int> que;
+    vector<bool> vis(graph.size(), false);
+    que.push(src);
+    while (que.size() != 0){
+        int front = que.front();
+        que.pop();
+        if (vis[front]) {
+            continue;       //  cycle encountered
+        }
+        cout << front << " ";
+        vis[front] = true;
+        for (Edge* e : graph[front]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+            }
+        }
+    }
+}
+
+//  simple bfs method 2
+void bfs2(int src) {
+    queue<int> que;
+    vector<bool> vis(graph.size(), false);
+    que.push(src);
+    while (que.size() != 0){
+        int size = que.size();
+        while (size-- > 0) {            //  can be used to detect _ Level _ of bfs traversal
+            int front = que.front();
+            que.pop();
+            if (vis[front]) {
+                continue;       //  cycle encountered
+            }
+            cout << front << " ";
+            vis[front] = true;
+            for (Edge* e : graph[front]) {
+                if (!vis[e->v]) {
+                    que.push(e->v);
+                }
+            }
+        }
+    }
+}
+
+void bfs_allInfo_1(int src, int dest) {
     /*
     * here this algo is a little wrong.
     * we are checking the -1 presence after adding elements in que
@@ -260,7 +447,7 @@ void bfs_allInfo(int src, int dest) {
     }
 }
 
-void bfs_allInfo_corrected(int src, int dest) {
+void bfs_allInfo_1_corr(int src, int dest) {
     queue<int> que;
     que.push(src);
     que.push(-1);
@@ -290,7 +477,7 @@ void bfs_allInfo_corrected(int src, int dest) {
     }
 }
 
-void bfs2(int src, int dest) {
+void bfs_allInfo_2(int src, int dest) {
     queue<int> que;
     vector<bool> vis(graph.size(), false);
     que.push(src);
@@ -319,6 +506,88 @@ void bfs2(int src, int dest) {
     }
 }
 
+bool hasCycle(int src) {
+    vector<bool> vis(graph.size(), false);
+    queue<int> que;
+    que.push(src);
+    while (que.size() != 0) {
+        int front = que.front();
+        que.pop();
+        if (vis[front]) {
+            return true;        //  cycle encountered
+        }
+        vis[front] = true;
+        for (Edge* e : graph[front]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+            }
+        }
+    }
+    return false;
+}
+
+int countCycles(int src) {
+    vector<bool> vis(graph.size(), false);
+    queue<int> que;
+    que.push(src);
+    int countCycle = 0;
+    while (que.size() != 0) {
+        int front = que.front();
+        que.pop();
+        if (vis[front]) {
+            countCycle++;        //  cycle encountered
+            continue;
+        }
+        vis[front] = true;
+        for (Edge* e : graph[front]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+            }
+        }
+    }
+    return countCycle;
+}
+
+//  ------------------ checking for tree -----------------
+bool isTree() {
+    return !hasCycle(0) && isConnectedGraph();
+}
+//  ----------------------- end --------------------------
+
+void bfs_with_ansLvl(int src, int dest) {
+    vector<bool> vis(graph.size(), false);
+    queue<int> que;
+    que.push(src);
+    int countLvl = 0;
+    while (que.size() != 0) {
+        int size = que.size();
+        while (size-- > 0) {
+            /*
+            * we can also use the method of adding null point in queue initialy
+            * and then adding null in queue after every encounter of null 
+            * ... null denotes change of level
+            */
+            int front = que.front();
+            que.pop();
+            if (vis[front]) {
+                continue;       //  cycle
+            }
+            if (front == dest) {
+                cout << "found at lvl : " << countLvl << endl;
+                return;
+            }
+            vis[front] = true;
+            for (Edge* e : graph[front]) {
+                if (!vis[e->v]) {
+                    que.push(e->v);
+                }
+            }
+        }
+        countLvl++;
+    }
+    cout << "not found" << endl;
+}
+
 //  hamiltonian path
 int hamiltonianPath(int start, int head, int size, vector<bool> &vis, string ans) {
     if (size == graph.size() - 1) {
@@ -344,6 +613,12 @@ int hamiltonianPath(int start, int head, int size, vector<bool> &vis, string ans
     return count;
 }
 
+//  euler's path
+int eulerPath() {
+    //  to be solved
+    return 0;
+}
+
 //  class for coloring of vertexes
 class ColorPair {
     public:
@@ -358,6 +633,7 @@ class ColorPair {
         }
 };
 
+//  queue of self made ColorPair obj
 bool isBipartite_util_01(int src, vector<int> &vis) {
     queue<ColorPair*> que;
     ColorPair* cp = new ColorPair(src, 0);
@@ -383,6 +659,7 @@ bool isBipartite_util_01(int src, vector<int> &vis) {
     return flag;
 }
 
+//  queue of pair obj
 bool isBipartite_util_02(int src, vector<int> &vis) {
     queue<pair<int, int>> que;
     que.push({src, 0});
@@ -407,7 +684,7 @@ bool isBipartite_util_02(int src, vector<int> &vis) {
     return flag;
 }
 
-bool isBipartite() {
+bool isBipartite_withInfo() {
     vector<int> vis(graph.size(), -1);
     int count = 0;
     bool flag = false;
@@ -416,11 +693,68 @@ bool isBipartite() {
             bool ans = isBipartite_util_01(i, vis);
                     // bool ans = isBipartite_util_02(i, vis);
             flag = flag || ans;
+            if (!flag)   count++;
             cout << count << " " << (boolalpha) << ans << endl;
-            count++;
         }
     }
     return flag;
+}
+
+bool isBipartite() {
+    vector<short> vis(graph.size(), -1);
+    for (int i = 0; i < graph.size(); i++) {
+        if (vis[i] != -1) {
+            continue;
+        }
+
+        queue<pair<int, short>> que;    //  first == vtx and second == color
+        que.push({i, 0});
+        while (que.size() != 0) {
+            pair<int, short> front = que.front();
+            que.pop();
+            if (vis[front.first] != -1) {
+                if (vis[front.first] != front.second) {
+                    return false;
+                }
+                continue;
+            }
+            vis[front.first] = front.second;
+            for (Edge* e : graph[front.first]) {
+                if (vis[e->v] == -1) {
+                    que.push({e->v, (front.second + 1) % 2});
+                }
+            }
+        }
+    }
+    return true;
+}
+
+void shortestPath_withBFS(int src, int des) {
+    queue<int> que;
+    queue<string> quePath;
+    vector<int> vis(graph.size(), false);
+    que.push(src);
+    quePath.push(to_string(src) + " ");
+    while (que.size() != 0) {
+        int front = que.front();
+        string frontPath = quePath.front();
+        que.pop();
+        quePath.pop();
+        if (vis[front]) {
+            continue;       //  cycle encountered
+        }
+        if (front == des) {
+            cout << frontPath << endl;
+            break;
+        }
+        vis[front] = true;
+        for (Edge* e : graph[front]) {
+            if (!vis[e->v]) {
+                que.push(e->v);
+                quePath.push(frontPath + to_string(e->v) + " ");
+            }
+        }
+    }
 }
 
 //  --------------- topological sort by DFS ------------------
@@ -591,20 +925,20 @@ int SCC_count() {
 
 //  ----------- main -------------
 void constructGraph() {
-    int tot_vert = 10;
+    int tot_vert = 7;
     for (int i = 0; i < tot_vert; i++) {
         graph.push_back(vector<Edge*>());
     }
 
     //  graph 1
-    // addEdge(0, 1, 10);
-    // addEdge(0, 3, 10);
-    // addEdge(1, 2, 10);
-    // addEdge(2, 3, 40);
-    // addEdge(3, 4, 2);
-    // addEdge(4, 5, 2);
-    // addEdge(4, 6, 3);
-    // addEdge(5, 6, 8);
+    addEdge(0, 1, 10);
+    addEdge(0, 3, 10);
+    addEdge(1, 2, 10);
+    addEdge(2, 3, 40);
+    addEdge(3, 4, 2);
+    addEdge(4, 5, 2);
+    addEdge(4, 6, 3);
+    addEdge(5, 6, 8);
            // extra
     // addEdge(6, 0, 100);
     // addEdge(2, 5, 100);
@@ -638,22 +972,22 @@ void constructGraph() {
     // addEdge_uni(3, 5);
 
     // graph 5
-    addEdge_uni(0, 1);
-    addEdge_uni(1, 3);
-    addEdge_uni(3, 8);
-    addEdge_uni(8, 9);
-    addEdge_uni(9, 8);
-    addEdge_uni(2, 0);
-    addEdge_uni(1, 2);
-    addEdge_uni(2, 4);
-    addEdge_uni(4, 3);
-    addEdge_uni(2, 5);
-    addEdge_uni(6, 4);
-    addEdge_uni(5, 6);
-    addEdge_uni(5, 7);
-    addEdge_uni(3, 7);
-    addEdge_uni(7, 6);
-    addEdge_uni(7, 9);
+    // addEdge_uni(0, 1);
+    // addEdge_uni(1, 3);
+    // addEdge_uni(3, 8);
+    // addEdge_uni(8, 9);
+    // addEdge_uni(9, 8);
+    // addEdge_uni(2, 0);
+    // addEdge_uni(1, 2);
+    // addEdge_uni(2, 4);
+    // addEdge_uni(4, 3);
+    // addEdge_uni(2, 5);
+    // addEdge_uni(6, 4);
+    // addEdge_uni(5, 6);
+    // addEdge_uni(5, 7);
+    // addEdge_uni(3, 7);
+    // addEdge_uni(7, 6);
+    // addEdge_uni(7, 9);
 }
 
 int main(int args, char**argv) {
@@ -663,7 +997,14 @@ int main(int args, char**argv) {
     // removeVertex(3);
     // display();
 
-    // vector<bool> vis1(graph.size(), false);
+    vector<bool> vis1(graph.size(), false);
+    // preOderPath(0, 0, vis1, "");
+    // cout << endl;
+    // postOderPath(0, 0, vis1, "");
+    // cout << totalEdges(false) << endl;
+    // dfs(0, vis1);
+    // cout << endl;
+    // dfs_noRec(0);
     // hasPath(0, 6, vis1, 0, to_string(0) + " -> ");
 
     // vector<bool> vis2(graph.size(), false);
@@ -674,16 +1015,33 @@ int main(int args, char**argv) {
     // cout << lightPath << " @ " << swsf << endl;
     // cout << heavyPath << " @ " << lwsf << endl;
 
+    // WeiPath* lp = lightestPath(0, 6, vis3);
+    // cout << lp->path << " @ " << lp->weight << endl;
+    
+    // WeiPath* hp = heavyestPath(0, 6, vis3);
+    // cout << hp->path << " @ " << hp->weight << endl;
+
+    // removeEdge(3, 4);        //  for testing connecting graph property
+    // cout << boolalpha << isConnectedGraph() << endl;
     // cout << getConnectedComp() << endl;
 
-    bfs_allInfo(0, 6);
-    // bfs_allInfo_corrected(0, 6);
-    // bfs2(0, 6);
+    // bfs1(0);
+    // bfs2(0);
+    // bfs_allInfo_1(0, 6);
+    // bfs_allInfo_1_corr(0, 6);
+    // bfs_allInfo_2(0, 6);
+
+    // cout << (boolalpha) << hasCycle(0) << endl;
+    // cout << countCycles(0) << endl;
+    // bfs_with_ansLvl(0, 5);
 
     // vector<bool> vis4(graph.size(), false);
     // cout << hamiltonianPath(0, 0, 0, vis4, "");
 
-    // cout << isBipartite() << endl;
+    // cout << (boolalpha) << isBipartite() << endl;
+    // cout << (boolalpha) << isBipartite_withInfo() << endl;
+
+    // shortestPath_withBFS(0, 6);
 
     // topologicalSort_();
     // topologicalSort_btr();
@@ -691,6 +1049,7 @@ int main(int args, char**argv) {
 
     // inverseGraph();
     // cout << SCC_count();
-    
+
+    cout << (boolalpha) << isTree() << endl;
     return 0;
 }
