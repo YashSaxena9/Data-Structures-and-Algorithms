@@ -31,6 +31,8 @@ public:
 
 //  ----------------- graph -------------------
 vector<vector<Edge*>> graph;
+vector<vector<Edge*>> dgraph(7, vector<Edge*>());
+vector<int> minAccWei(7, 0);
 
 //  --------------------- methods ----------------------
 void display() {
@@ -59,6 +61,14 @@ void display(vector<vector<Edge*>> &graph_) {
 
 //  for undirected weighted
 void addEdge(int u, int v, int w) {
+    if (u < 0 || u >= graph.size() || v < 0 || v >= graph.size()) {
+        return;
+    }
+    graph[u].push_back(new Edge(v, w));
+    graph[v].push_back(new Edge(u, w));
+}
+
+void addEdge(vector<vector<Edge*>> &graph, int u, int v, int w) {
     if (u < 0 || u >= graph.size() || v < 0 || v >= graph.size()) {
         return;
     }
@@ -920,6 +930,144 @@ int SCC_count() {
     return count;
 }
 
+//  ------------------ dijikstra ------------------
+/* dpair object for dijikstra algo,
+*  it is used to carry vertex , its parent 
+*  and weight so far for the path in between
+*/
+class dpair {
+    public:
+        int vtx;
+        int parent;
+        int wt;      //  weight
+        int wsf;    //  weight so far
+
+        dpair(int vts, int parent, int wt, int wsf) {
+            this->vtx = vts;
+            this->parent = parent;
+            this->wt = wt;
+            this->wsf = wsf;
+        }
+
+        //  overriding minHeap behind 2 interfaces
+        //  minHeap with 2 interfaces act as maxHeap
+        //  overloaded < to trick maxHeap interface
+        bool operator < (dpair const &o) const {
+            return this->wsf > o.wsf;       //  self = strong -> other is weak so subtraction is +ve
+            //  +ve = make heap look I'm strong
+            //  strong element at bottom of heap in minHeap
+        }
+};
+
+//  bfs with wsf and priority queue
+//  "weight so far" and "priority queue" plays the important role
+void dijikstra(int src) {
+    /* 
+    // priority_queue<int, vector<int>, greater<int>> que;
+                            this method can be used for
+                            converting max heap to min heap
+                            for primitive datatype priority queues
+    */
+    priority_queue<dpair> que; 
+    vector<bool> vis(graph.size(), false);
+    que.push(dpair(src, -1, 0, 0));
+    while (que.size() != 0) {
+        dpair front = que.top();
+        que.pop();
+        if (vis[front.vtx]) {
+            continue;       //  cycle encountered
+        }
+        if (front.parent != -1) {
+            addEdge(dgraph, front.parent, front.vtx, front.wt);     //  to create a spanning tree(not msp)
+            minAccWei[front.vtx] = front.wsf;
+        }
+        /** if (front.vtx == des) {
+         *      cout << front.wsf << endl;
+         * }
+        */
+        vis[front.vtx] = true;
+        for (Edge* e : graph[front.vtx]) {
+            if (!vis[e->v]) {
+                que.push(dpair(e->v, front.vtx, e->w, front.wsf + e->w));
+            }
+        }
+    }
+
+    //  to display spanning tree formed and weight to visit each vtx
+    display(dgraph);
+    for (int a : minAccWei) {
+        cout << a << " ";
+    } cout << endl;
+}
+
+//  ------------------ Prims Algo ------------------
+/* Primpair object for Prims algo,
+*  it is used to carry vertex , its parent 
+*  and weight for them
+*/
+class Primpair {
+    public:
+        int vtx;
+        int parent;
+        int wt;      //  weight
+
+        Primpair(int vts, int parent, int wt) {
+            this->vtx = vts;
+            this->parent = parent;
+            this->wt = wt;
+        }
+
+        //  overriding minHeap behind 2 interfaces
+        //  minHeap with 2 interfaces act as maxHeap
+        //  overloaded < to trick maxHeap interface
+        bool operator < (Primpair const &o) const {
+            return this->wt > o.wt;       //  self = strong -> other is weak so subtraction is +ve
+            //  +ve = make heap look I'm strong
+            //  strong element at bottom of heap in minHeap
+        }
+};
+
+//  bfs with wt between 2 vtxs and priority queue
+//  "weight" and "priority queue" plays the important role
+void primsAlgo(int src) {
+    vector<vector<Edge*>> PrimGraph(graph.size(), vector<Edge*>());
+    /* 
+    // priority_queue<int, vector<int>, greater<int>> que;
+                            this method can be used for
+                            converting max heap to min heap
+                            for primitive datatype priority queues
+    */
+    priority_queue<Primpair> que; 
+    vector<bool> vis(graph.size(), false);
+    que.push(Primpair(src, -1, 0));
+    while (que.size() != 0) {
+        Primpair front = que.top();
+        que.pop();
+        if (vis[front.vtx]) {
+            continue;       //  cycle encountered
+        }
+        if (front.parent != -1) {
+            addEdge(PrimGraph, front.parent, front.vtx, front.wt);     //  to create a minimum spanning tree
+        }
+        /** if (front.vtx == des) {
+         *      cout << front.wsf << endl;
+         * }
+        */
+        vis[front.vtx] = true;
+        for (Edge* e : graph[front.vtx]) {
+            if (!vis[e->v]) {
+                que.push(Primpair(e->v, front.vtx, e->w));
+            }
+        }
+    }
+
+    //  to display spanning tree formed and weight to visit each vtx
+    display(PrimGraph);
+}
+
+// ====================
+//  union find
+/* pending */
 
 /* ========================================================== */
 
@@ -931,14 +1079,14 @@ void constructGraph() {
     }
 
     //  graph 1
-    addEdge(0, 1, 10);
-    addEdge(0, 3, 10);
-    addEdge(1, 2, 10);
-    addEdge(2, 3, 40);
-    addEdge(3, 4, 2);
-    addEdge(4, 5, 2);
-    addEdge(4, 6, 3);
-    addEdge(5, 6, 8);
+    // addEdge(0, 1, 10);
+    // addEdge(0, 3, 10);
+    // addEdge(1, 2, 10);
+    // addEdge(2, 3, 40);
+    // addEdge(3, 4, 2);
+    // addEdge(4, 5, 2);
+    // addEdge(4, 6, 3);
+    // addEdge(5, 6, 8);
            // extra
     // addEdge(6, 0, 100);
     // addEdge(2, 5, 100);
@@ -988,16 +1136,26 @@ void constructGraph() {
     // addEdge_uni(3, 7);
     // addEdge_uni(7, 6);
     // addEdge_uni(7, 9);
+
+    // graph 6
+    addEdge(graph, 0, 1, 11);
+    addEdge(graph, 0, 3, 10);
+    addEdge(graph, 1, 2, 20);
+    addEdge(graph, 2, 3, 40);
+    addEdge(graph, 3, 4, 2);
+    addEdge(graph, 4, 5, 2);
+    addEdge(graph, 4, 6, 3);
+    addEdge(graph, 5, 6, 8);
 }
 
 int main(int args, char**argv) {
     constructGraph();
-    display();
+    // display();
     // removeEdge(4, 5);
     // removeVertex(3);
     // display();
 
-    vector<bool> vis1(graph.size(), false);
+    // vector<bool> vis1(graph.size(), false);
     // preOderPath(0, 0, vis1, "");
     // cout << endl;
     // postOderPath(0, 0, vis1, "");
@@ -1050,6 +1208,9 @@ int main(int args, char**argv) {
     // inverseGraph();
     // cout << SCC_count();
 
-    cout << (boolalpha) << isTree() << endl;
+    // cout << (boolalpha) << isTree() << endl;
+
+    // dijikstra(0);
+    primsAlgo(4);
     return 0;
 }
