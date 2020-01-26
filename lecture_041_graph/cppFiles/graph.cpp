@@ -2,8 +2,8 @@
 #include<vector>
 #include<string>
 #include<queue>
-//  import java.util.LinkedList  //  in java
-//  #include<list>               //  in cpp
+/* import java.util.LinkedList  //  in java
+#include<list>               //  in cpp */
 using namespace std;
 
 //  ------------ Edge Class -------------
