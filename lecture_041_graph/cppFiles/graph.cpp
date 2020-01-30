@@ -1079,14 +1079,14 @@ void constructGraph() {
     }
 
     //  graph 1
-    // addEdge(0, 1, 10);
-    // addEdge(0, 3, 10);
-    // addEdge(1, 2, 10);
-    // addEdge(2, 3, 40);
-    // addEdge(3, 4, 2);
-    // addEdge(4, 5, 2);
-    // addEdge(4, 6, 3);
-    // addEdge(5, 6, 8);
+    addEdge(0, 1, 10);
+    addEdge(0, 3, 10);
+    addEdge(1, 2, 10);
+    addEdge(2, 3, 40);
+    addEdge(3, 4, 2);
+    addEdge(4, 5, 2);
+    addEdge(4, 6, 3);
+    addEdge(5, 6, 8);
            // extra
     // addEdge(6, 0, 100);
     // addEdge(2, 5, 100);
@@ -1138,14 +1138,14 @@ void constructGraph() {
     // addEdge_uni(7, 9);
 
     // graph 6
-    addEdge(graph, 0, 1, 11);
-    addEdge(graph, 0, 3, 10);
-    addEdge(graph, 1, 2, 20);
-    addEdge(graph, 2, 3, 40);
-    addEdge(graph, 3, 4, 2);
-    addEdge(graph, 4, 5, 2);
-    addEdge(graph, 4, 6, 3);
-    addEdge(graph, 5, 6, 8);
+    // addEdge(graph, 0, 1, 11);
+    // addEdge(graph, 0, 3, 10);
+    // addEdge(graph, 1, 2, 20);
+    // addEdge(graph, 2, 3, 40);
+    // addEdge(graph, 3, 4, 2);
+    // addEdge(graph, 4, 5, 2);
+    // addEdge(graph, 4, 6, 3);
+    // addEdge(graph, 5, 6, 8);
 }
 
 int main(int args, char**argv) {
