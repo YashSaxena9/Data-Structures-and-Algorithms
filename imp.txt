@@ -1,2 +1,6 @@
 gate smashers
 https://www.youtube.com/watch?v=KBtk5FUeJbk&list=RDMMktvTqknDobU&index=5
+
+Sieve of Sundaram
+Sieve of Eratosthenes
+Sieve of Atkin

@@ -4,7 +4,7 @@ public class addSubArray {
 		int[] arr2 = {1};
 		addArr(arr1, arr2);
 		System.out.println();
-		subArr(arr1, arr2);
+		// subArr(arr1, arr2);
 	}
 
 	public static void display(int[] arr) {
