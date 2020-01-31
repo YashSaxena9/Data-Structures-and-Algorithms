@@ -9,6 +9,7 @@ public class graph {
     //  ----------------- graph -------------------
     public static ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
     
+    //  ---------------- main ----------------
     public static void main(String[] args) {
         constructGraph();
         display();
@@ -17,6 +18,7 @@ public class graph {
         display();
         // queue<Edge> arr = new LinkedList<>();
     }
+
     public static void constructGraph() {
         int tot_vert = 7;       //  size of graph
         //  initialising graph as it points to null
@@ -32,7 +34,10 @@ public class graph {
         addEdge(4, 6, 3);
         addEdge(5, 6, 8);
     }
-
+    //  ----------------- main end ----------------------
+    
+    /*****************************************************************************************/
+    
     //  -------------------- Edge Class ----------------------
 
     public static class Edge {

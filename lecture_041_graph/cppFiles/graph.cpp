@@ -1211,6 +1211,6 @@ int main(int args, char**argv) {
     // cout << (boolalpha) << isTree() << endl;
 
     // dijikstra(0);
-    primsAlgo(4);
+    // primsAlgo(4);
     return 0;
 }
