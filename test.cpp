@@ -1,67 +1,93 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <iosfwd>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<pair<int, int>> merge(vector<pair<int, int>>& left, vector<pair<int, int>>& right) {
-        vector<pair<int, int>> ans(left.size() + right.size());
-        int ptr1 = 0, ptr2 = 0, ptr3 = 0;
-        while (ptr1 < left.size() || ptr2 < right.size()) {
-            if (ptr1 < left.size() && ptr2 < right.size()) {
-                ans[ptr3++] = (left[ptr1] <= right[ptr2]) ? left[ptr1++] : right[ptr2++];
-            }
-            else if (ptr1 >= left.size()){
-                ans[ptr3++] = right[ptr2++];
-            }
-            else if (ptr2 >= right.size()){
-                ans[ptr3++] = left[ptr1++];
-            }
+    void dfs(int r, int c, vector<vector<char>> &board)
+    {
+        if (r < 0 || c < 0 || r >= board.size() || c >= board[0].size() || board[r][c] != 'O')
+        {
+            return;
         }
-        return ans;
+        board[r][c] = '#';
+        dfs(r + 1, c, board);
+        dfs(r - 1, c, board);
+        dfs(r, c + 1, board);
+        dfs(r, c - 1, board);
     }
-    
-    vector<pair<int, int>> mergeSort(vector<pair<int, int>>& arr, int si, int ei) {
-        if (si == ei) {
-            return {arr[si]};
+
+    void display(vector<vector<char>> &board)
+    {
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                cout << board[i][j] << " ";
+            }
+            cout << endl;
         }
-        int mid = (si + ei) >> 1;
-        vector<pair<int, int>> left = mergeSort(arr, si, mid);
-        vector<pair<int, int>> right = mergeSort(arr, mid + 1, ei);
-        return merge(left, right);
+        cout << "----------" << endl;
     }
-    
-    vector<int> targetSum(vector<pair<int, int>>& arr, int target) {
-        int si = 0, ei = arr.size() - 1;
-        while (si < ei) {
-            int currValue = arr[si].first + arr[ei].first;
-            if (currValue == target) {
-                return {arr[si].second, arr[ei].second};
+
+    void solve(vector<vector<char>> &board)
+    {
+        vector<bool> vis(board.size(), false);
+        for (int i = 0; i < board[0].size(); i++)
+        {
+            if (board[0][i] == 'O')
+            {
+                dfs(0, i, board);
             }
-            else if (arr[si].first + arr[ei].first > target) {
-                ei--;
-            }
-            else {
-                si++;
+            if (board[board.size() - 1][i] == 'O')
+            {
+                dfs(board.size() - 1, i, board);
             }
         }
-        return {-1, -1};
-    }
-    
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<pair<int, int>> numPair(nums.size());
-        for (int i = 0; i < nums.size(); i++) {
-            numPair[i] = {nums[i], i};
+        for (int i = 0; i < board.size(); i++)
+        {
+            if (board[i][0] == 'O')
+                dfs(i, 0, board);
+            if (board[i][board[0].size() - 1] == 'O')
+                dfs(i, board[0].size() - 1, board);
         }
-        numPair = mergeSort(numPair, 0, nums.size() - 1);
-        return targetSum(numPair, target);
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                if (board[i][j] == 'O')
+                    board[i][j] = 'X';
+                if (board[i][j] == '#')
+                    board[i][j] = 'O';
+            }
+        }
     }
 };
 
-int main(int args, char**argv) {
-    Solution twoSum_;
-    vector<int> nums = {2, 7, 10, 15};
-    int tar = 12;
-    vector<int> ans = twoSum_.twoSum(nums, tar);
-    cout << ans[0] << " " << ans[1] << " , size : " << ans.size() << endl;
+int main(int args, char **argv)
+{
+    // Solution twoSum_;
+    // vector<vector<char>> board =
+    // {{'X', 'X', 'X', 'X'},
+    // {'X', 'O', 'O', 'X'},
+    // {'X', 'X', 'O', 'X'},
+    // {'X', 'O', 'X', 'X'}};
+    // cout << "to solve" << endl;
+    // twoSum_.solve(board);
+
+    // int *p;
+    // if (true)
+    // {
+    //     int x = 5;
+    //     p = &x;
+    // }
+    // int* x = new int[8]{1,2,3,4,15,6,6,4};
+    // delete p;
+    // cout << *p << endl; // ???
+    // char x(65);
+    // cout << x << endl;
 }
