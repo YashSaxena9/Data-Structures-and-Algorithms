@@ -1065,9 +1065,24 @@ void primsAlgo(int src) {
     display(PrimGraph);
 }
 
-// ====================
-//  union find
-/* pending */
+//  ------------------ Union find Algo ------------------
+//  DSU (disjoint set union)
+//  in krusal_dsu.cpp file
+void merge(int p1, int p2, vector<int>& par, vector<int>& size) {
+    if (size[p1] < size[p2]) {
+        par[p1] = p2;
+        size[p2] += size[p1];
+    } else {
+        par[p2] = p1;
+        size[p1] += size[p2];
+    }
+}
+
+int findPar(int vtx, vector<int>& par) {
+    if (par[vtx] == vtx)        return vtx;
+    par[vtx] = findPar(par[vtx], par);              //  path compression call
+    return par[vtx];
+}
 
 /* ========================================================== */
 
