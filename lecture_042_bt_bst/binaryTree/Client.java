@@ -25,9 +25,9 @@ public class Client {
         System.out.println(root.find(40));
         System.out.println(root.heightInEdges());
         System.out.println(root.heightInNodes());
-        // System.out.println(root.maxNode().data);         //  Node class is private
-        // System.out.println(root.minNode().data);         //  Node class is private
-        // System.out.println(root.findNode(100).data);         //  Node class is private
+        System.out.println(root.maxNode().data);         //  Node class is private
+        System.out.println(root.minNode().data);         //  Node class is private
+        System.out.println(root.findNode(100).data);         //  Node class is private
         // System.out.println(root.root);           // .root is private
         for (int n : root.rootToNodePath(100)) {
             System.out.print(n + " ");
@@ -37,6 +37,8 @@ public class Client {
         System.out.println();
         for (int i : root.get_k_Away(110, 4)) {
             System.out.print(i + " ");
-        }
+        }   System.out.println();
+        System.out.println(root.get_k_Away_noSpace(110, 4));
+        root.print_k_Away_noSpace(110, 4);
     }    
 }

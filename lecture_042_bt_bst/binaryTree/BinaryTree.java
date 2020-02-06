@@ -549,5 +549,105 @@ public class BinaryTree {
     }
     //================================= k down return end =====================================
 
+    //================================= k down no space method return =====================================
+    // nodes at 'K' radii from a given node
+    // LeetCode 863. All Nodes Distance K in Binary Tree
+    /**
+     * if the tree is made flat and spread in planar 
+     * having passed node/node.data as center
+     * then, it prints all the nodes at K'th distance
+     */
+    public ArrayList<Integer> get_k_Away_noSpace(int data, int k) {
+        return rootToNodePath_k_Away_return(this.root, data, k);
+    }
+    
+    private int dis = -1;
+    private ArrayList<Integer> rootToNodePath_k_Away_return(Node node, int data, int K) {
+        if (node == null) {
+            dis = -1;
+            return new ArrayList<>();
+        }
+        if (node.data == data) {
+            ArrayList<Integer> base = K_down_noSpace_return(node, null, K);
+            dis = 1;
+            return base;
+        }
+        ArrayList<Integer> left = rootToNodePath_k_Away_return(node.left, data, K);
+        if (dis != -1) {
+            left.addAll(K_down_noSpace_return(node, node.left, K - dis));
+            dis += 1;
+            return left;
+        }
+        ArrayList<Integer> right = rootToNodePath_k_Away_return(node.right, data, K);
+        if (dis != -1) {
+            right.addAll(K_down_noSpace_return(node, node.right, K - dis));
+            dis += 1;
+            return right;
+        }
+        dis = -1;
+        return new ArrayList<>();
+    }
+    
+    private ArrayList<Integer> K_down_noSpace_return(Node node, Node noAcessNode, int K) {
+        if (node == null || node == noAcessNode) {
+            return new ArrayList<>();
+        }
+        if (K == 0) {
+            ArrayList<Integer> base = new ArrayList<>();
+            base.add(node.data);
+            return base;
+        }
+        ArrayList<Integer> recAns = new ArrayList<>();
+        recAns.addAll(K_down_noSpace_return(node.left, noAcessNode, K - 1));
+        recAns.addAll(K_down_noSpace_return(node.right, noAcessNode, K - 1));
+        return recAns;
+    }
+    //================================= k down no space method return end =====================================
+
+    //================================= k down no space return method =====================================
+    // nodes at 'K' radii from a given node
+    // LeetCode 863. All Nodes Distance K in Binary Tree
+    /**
+     * if the tree is made flat and spread in planar 
+     * having passed node/node.data as center
+     * then, it prints all the nodes at K'th distance
+     */
+    public void print_k_Away_noSpace(int data, int k) {
+        rootToNodePath_k_Away(this.root, data, k);
+    }
+
+    private int rootToNodePath_k_Away(Node node, int data, int K) {
+        if (node == null) {
+            return -1;
+        }
+        if (node.data == data) {
+            K_down_noSpace(node, null, K);
+            return 1;
+        }
+        int leftDis = rootToNodePath_k_Away(node.left, data, K);
+        if (leftDis != -1) {
+            K_down_noSpace(node, node.left, K - leftDis);
+            return leftDis + 1;
+        }
+        int rightDis = rootToNodePath_k_Away(node.right, data, K);
+        if (rightDis != -1) {
+            K_down_noSpace(node, node.right, K - rightDis);
+            return rightDis + 1;
+        }
+        return -1;
+    }
+    
+    private void K_down_noSpace(Node node, Node noAcessNode, int K) {
+        if (node == null || node == noAcessNode) {
+            return;
+        }
+        if (K == 0) {
+            System.out.print(node.data + " ");
+            return;
+        }
+        K_down_noSpace(node.left, noAcessNode, K - 1);
+        K_down_noSpace(node.right, noAcessNode, K - 1);
+    }
+    //================================= k down no space method return end =====================================
 
 }
