@@ -555,7 +555,8 @@ public class BinaryTree {
     /**
      * if the tree is made flat and spread in planar 
      * having passed node/node.data as center
-     * then, it prints all the nodes at K'th distance
+     * then, it return an arrayList of all the nodes at K'th distance
+     * @return List<Integer> - arrayList of data of nodes needed
      */
     public ArrayList<Integer> get_k_Away_noSpace(int data, int k) {
         return rootToNodePath_k_Away_return(this.root, data, k);
