@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 /**
  * BinaryTree
  */
@@ -47,6 +48,14 @@ public class BinaryTree {
     /* ========================== constructors ================================== */
     
     /**
+     * default construction for a tree of single Node
+     * with null/default values
+     */
+    BinaryTree() {
+        //  default
+    }
+
+    /**
      * constructor to choose wheater to construct tree
      * from preOrder or lvlOrder
      * @param arr   traversal of array in preOrder or levelOrder
@@ -58,7 +67,7 @@ public class BinaryTree {
         if (isPreOrd) {
             this.root = preOrdConstruct(arr);
         } else {
-            // this.root = lvlConstruct(arr);
+            this.root = lvlConstruct(arr, 0);
         }
     }
     
@@ -70,16 +79,26 @@ public class BinaryTree {
         this.root = preOrdConstruct(arr);
     }
     
-    private static int idx = 0;
+    private int idx = 0;
     private Node preOrdConstruct(int[] arr) {
         if (idx >= arr.length || arr[idx] == -1) {       //  null value found
             idx++;
-            if (idx == arr.length)  idx = 0;    //  index reset on out_of_bound
+            // if (idx == arr.length)  idx = 0;    //  index reset on out_of_bound(if idx is static)
             return null;
         }
         Node node = new Node(arr[idx++]);
         node.left = preOrdConstruct(arr);
         node.right = preOrdConstruct(arr);
+        return node;
+    }
+
+    private Node lvlConstruct(int[] arr, int idx_itr) {
+        if (idx_itr >= arr.length || arr[idx_itr] == -1) {
+            return null;
+        }
+        Node node = new Node(arr[idx_itr]);
+        node.left = lvlConstruct(arr, idx_itr * 2 + 1);
+        node.right = lvlConstruct(arr, idx_itr * 2 + 2);
         return node;
     }
     
@@ -223,6 +242,212 @@ public class BinaryTree {
         if (node == null)       return -1;
         return Math.max(height_edges(node.left), height_edges(node.right)) + 1;
     }
+
+    /**
+     * to display tree from level order traversal
+     * without making actual tree
+     * (the array must be of level order traversal and have -1 for null)
+     * ------ can be used to get preview of tree ------
+     * @param arr - array of level order traversal(with -1 for null)
+     */
+    public void pseudotreeDisplay(int[] arr) {
+        displayWithoutMakingTree(arr, 0);
+    }
+    private void displayWithoutMakingTree(int[] arr, int vidx) {
+        if (vidx >= arr.length || arr[vidx] == -1) {
+            return;
+        }
+        StringBuilder str = new StringBuilder();
+        str.append((vidx * 2 + 1 < arr.length && arr[vidx * 2 + 1] != -1) ? arr[vidx * 2 + 1] : " . ");
+        str.append(" -> " + arr[vidx] + " <- ");
+        str.append((vidx * 2 + 2 < arr.length && arr[vidx * 2 + 2] != -1) ? arr[vidx * 2 + 2] : " . ");
+        System.out.println(str);        //  fires .toString() first
+        displayWithoutMakingTree(arr, vidx * 2 + 1);
+        displayWithoutMakingTree(arr, vidx * 2 + 2);
+    }
+
+    /**
+     * this method returns a string of pre-order traversal of the tree
+     * @return String
+     */
+    public String preOrder_return() {
+        return preOrder_return(this.root);
+    }
+    private String preOrder_return(Node node) {
+        if (node == null) {     //  base case of null
+            // return "null ";
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+        str.append(node.data + " ");
+        
+        // if (node.left != null)
+            str.append(preOrder_return(node.left));
+        
+        // if (node.right != null)
+            str.append(preOrder_return(node.right));
+        return str.toString();
+    }
+
+    /**
+     * this method returns a string of in-order traversal of the tree
+     * @return String
+     */
+    public String inOrder_return() {
+        return inOrder_return(this.root);
+    }
+    private String inOrder_return(Node node) {
+        if (node == null) {     //  base case of null
+            // return "null ";
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+        // if (node.left != null)
+            str.append(inOrder_return(node.left));
+
+        str.append(node.data + " ");
+
+        // if (node.right != null)
+            str.append(inOrder_return(node.right));
+        return str.toString();
+    }
+
+    /**
+     * this method returns a string of post-order traversal of the tree
+     * @return String
+     */
+    public String postOrder_return() {
+        return postOrder_return(this.root);
+    }
+    private String postOrder_return(Node node) {
+        if (node == null) {     //  base case of null
+            // return "null ";
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+        // if (node.left != null)
+        str.append(postOrder_return(node.left));
+        
+        // if (node.right != null)
+        str.append(postOrder_return(node.right));
+        
+        str.append(node.data + " ");
+        return str.toString();
+    }
+
+    /**
+     * this method prints a string of pre-order traversal of the tree
+     */
+    public void preOrder_print() {
+        preOrder_print(this.root);
+        System.out.println();
+    }
+    private void preOrder_print(Node node) {
+        if (node == null) {     //  base case of null
+            return;
+        }
+        StringBuilder str = new StringBuilder();
+        System.out.print(node.data + " ");
+        
+        // if (node.left != null)
+            preOrder_print(node.left);
+        
+        // if (node.right != null)
+            preOrder_print(node.right);
+    }
+
+    /**
+     * this method prints a string of in-order traversal of the tree
+     */
+    public void inOrder_print() {
+        inOrder_print(this.root);
+        System.out.println();
+    }
+    private void inOrder_print(Node node) {
+        if (node == null) {     //  base case of null
+            return;
+        }
+        // if (node.left != null)
+            inOrder_print(node.left);
+
+        System.out.print(node.data + " ");
+
+        // if (node.right != null)
+            inOrder_print(node.right);
+    }
+
+    /**
+     * this method prints a string of post-order traversal of the tree
+     */
+    public void postOrder_print() {
+        postOrder_print(this.root);
+        System.out.println();
+    }
+    private void postOrder_print(Node node) {
+        if (node == null) {     //  base case of null
+            return;
+        }
+        // if (node.left != null)
+        postOrder_print(node.left);
+        
+        // if (node.right != null)
+        postOrder_print(node.right);
+        
+        System.out.print(node.data + " ");
+    }
+
+    public void lvl_print() {
+        System.out.println(lvl_print_2loop_Bfs(this.root));
+        System.out.println(lvl_print_queWithNull(this.root));
+    }
+    private String lvl_print_2loop_Bfs(Node node) {
+        LinkedList<Node> que = new LinkedList<>();
+        StringBuilder ans = new StringBuilder();
+        que.addLast(node);
+        while (que.size() != 0) {
+            int size = que.size();
+            while (size-- > 0) {
+                Node front = que.removeFirst();
+                
+                ans.append(front.data + " ");
+
+                if (front.left != null) {
+                    que.addLast(front.left);
+                }
+                if (front.right != null) {
+                    que.addLast(front.right);
+                }
+            }
+            ans.append("\n");
+        }
+        return ans.toString();
+    }
+    private String lvl_print_queWithNull(Node node) {
+        LinkedList<Node> que = new LinkedList<>();
+        StringBuilder ans = new StringBuilder();
+        que.addLast(node);
+        que.addLast(null);
+        while (que.size() != 1) {       //  1 because null would be left 
+            Node front = que.removeFirst();
+            if (front == null) {
+                que.addLast(null);
+                ans.append("\n");
+                continue;
+            }
+            ans.append(front.data + " ");
+
+            if (front.left != null) {
+                que.addLast(front.left);
+            }
+            if (front.right != null) {
+                que.addLast(front.right);
+            }
+        }
+        return ans.toString();
+    }
+
+    /* ======================================= traversals ========================================== */
+
 
     /* =================================== if Node Class is public ========================================= */
     /**
