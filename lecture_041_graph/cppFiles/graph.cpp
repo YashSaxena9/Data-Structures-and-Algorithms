@@ -1066,6 +1066,7 @@ void primsAlgo(int src) {
 }
 
 //  ------------------ Union find Algo ------------------
+/* ============= in file kruskal_dsu.cpp ============= */
 //  DSU (disjoint set union)
 //  in krusal_dsu.cpp file
 void merge(int p1, int p2, vector<int>& par, vector<int>& size) {
@@ -1083,6 +1084,15 @@ int findPar(int vtx, vector<int>& par) {
     par[vtx] = findPar(par[vtx], par);              //  path compression call
     return par[vtx];
 }
+
+/* ========================================================== */
+
+//  ------------------ Articulation point and bridge Algo ------------------
+//  points from where the graph will make most number of components if
+//  those points/vertexes disappear are called articulation point
+/** 
+ * can be found in articulaion.cpp
+*/
 
 /* ========================================================== */
 

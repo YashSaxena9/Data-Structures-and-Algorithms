@@ -1,52 +1,52 @@
 import java.util.BitSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-class Solution {
-    //     public int lengthOfLongestSubstring(String s) {
-    //         int length = 0;
-    //         for (int i = 0; i < s.length(); i++) {
-    //             for (int j = i + 1; j <= s.length(); j++) {
-    //                 String temp = s.substring(i, j);
-    //                 if (haveNoRepeat(temp) && temp.length() > length) {
-    //                     length = temp.length();
-    //                 }
-    //             }
-    //         }
-    //         return length;
-    //     }
-        
-    //     private boolean haveNoRepeat(String str) {
-    //         BitSet vis = new BitSet(26);
-    //         for (int i = 0; i < str.length(); i++) {
-    //             if (!vis.get(str.charAt(i) - ' ')) {
-    //                 vis.set(str.charAt(i) - ' ');
-    //             } else {
-    //                 return false;
-    //             }
-    //         }
-    //         return true;
-    //     }
-    public int lengthOfLongestSubstring(String s) {
-        int[] charArr = new int[256];
-        int ptr1 = 0, ptr2 = 0;
-        int len = 0, finLen = len;
-        charArr[s.charAt(ptr2) - ' ']++;
-        while (ptr2 < s.length() - 1) {
-            if (charArr[s.charAt(ptr2) - (char)0] <= 1) {
-                System.out.println(s.charAt(ptr2));
-                len++;
-                ptr2++;
-                charArr[s.charAt(ptr2) - (char)0]++;
-            }
-            else {
-                ptr1++;
-                charArr[s.charAt(ptr1) - (char)0]--;
-                finLen = Math.max(finLen, len);
-            }
-        }
-        return finLen;
+/**
+ * Definition for a binary tree node. public class TreeNode { int val; TreeNode
+ * left; TreeNode right; TreeNode(int x) { val = x; } }
+ */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
     }
 }
 
+class Solution {
+    HashMap<TreeNode, TreeNode> parents = new HashMap<>();
+
+    private void dfs_preOrder(TreeNode node, TreeNode parent) {
+        if (node == null) {
+            return;
+        }
+        parents.put(node, parent);
+        dfs_preOrder(node.left, node);
+        dfs_preOrder(node.right, node);
+    }
+
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
+        dfs_preOrder(root, null);
+        LinkedList<TreeNode> que = new LinkedList<>();
+        que.addLast(root);
+        while (que.size() != 0) {
+            int size = que.size();
+            while (size-- > 0) {
+                if (K == 0) {
+                    parents.get
+                }
+                TreeNode front = que.removeFirst();
+
+            }
+        }
+        return null;
+    }
+}
 
 /**
  * test
@@ -55,6 +55,6 @@ public class test {
     public static void main(String[] args) {
         Solution ans = new Solution();
         // System.out.println("->" + (char)64 + "<-");
-        System.out.println(ans.lengthOfLongestSubstring("abcabcbb"));
+        // System.out.println(ans.lengthOfLongestSubstring("abcabcbb"));
     }
 }

@@ -156,6 +156,7 @@ public class binTree {
         K_Down(node.right, pNode, level - 1);
     }
 
+    //  we call root to node path here
     public static void K_Away(Node root, int data, int k_value) {   //  root ~== node
         ArrayList<Node> path = rootToNodePath(root, data);
         Node pnode = null;
@@ -165,6 +166,7 @@ public class binTree {
         }
     }
 
+    //  no need for root to node path call
     public static int K_Away_btr(Node node, int data, int k_value) {
         if (node == null) {
             return -1;
