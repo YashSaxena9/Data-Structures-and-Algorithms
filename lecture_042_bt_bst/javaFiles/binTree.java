@@ -247,7 +247,7 @@ public class binTree {
         System.out.println();
     }
 
-    //  ==============================================================================================================================================================
+    //  =============================================================================================================================
     /**
      * BST
      */
@@ -275,8 +275,47 @@ public class binTree {
             return findInBST(node.right, data);
         }
     }
+
+    public static boolean findInBST_noRec(Node node, int data) {
+        while (node != null) {
+            if (node.data == data) {
+                return true;
+            } else if (data < node.data) {
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return false;
+    }
+
+    public static Node addNode(Node node, int data) {
+        if (node == null) {
+            return new Node(data);
+        }
+        if (data < node.data) {
+            node.left = addNode(node.left, data);
+        } else {
+            node.right = addNode(node.right, data);
+        }
+        return node;
+    }
+
+    public static class allSol {
+        int height = -1;
+        int size = 0;
+        boolean find = false;
+        int diameter = 0;
+        
+        Node pred = null;
+        Node succ = null;
+        Node prev = null;
+
+        int ceil = Integer.MAX_VALUE;
+        int floor = Integer.MIN_VALUE;
+    }
     
-    //  ==============================================================================================================================================================
+    //  =============================================================================================================================
     
     public static void solve() {
         int[] tree1 = {
@@ -310,7 +349,10 @@ public class binTree {
         }
         Node bst = makeBST(arr, 0, arr.length - 1);
         System.out.println(bst);
-        System.out.println(findInBST(bst, 80));
+        addNode(bst, 9999);
+        System.out.println(bst);
+        // System.out.println(findInBST(bst, 80));
+        // System.out.println(findInBST_noRec(bst, 80));
     }
 
     public static void main(String[] args) {
