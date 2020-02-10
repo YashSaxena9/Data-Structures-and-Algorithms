@@ -99,11 +99,11 @@ public class binTree {
         
     }
     
-    public static int height(Node node) {
-        if (node == null)
-        return -1;
+    public static int height(Node node) {   //  in terms of edges
+        if (node == null) {
+            return -1;  //  make it 0 for in terms of nodes
+        }
         return Math.max(height(node.left), height(node.right)) + 1;
-        
     }
 
     public static ArrayList<Node> rootToNodePath(Node node, int data) {
@@ -189,12 +189,94 @@ public class binTree {
     }
     //================================= k down end =====================================
 
+    public static int diameter(Node node) {     //  in terms of edges
+        if (node == null) {
+            return 0;
+        }
+        int ld = diameter(node.left);
+        int rd = diameter(node.right);
+        int lh = height(node.left);     //  height in terms of edges
+        int rh = height(node.right);
+        return Math.max(Math.max(ld, rd), lh + rh + 2);
+    }
+    
+    public static int[] diameter_btr_edges(Node node) {     //  in terms of edges
+        if (node == null) {
+            return new int[]{0, -1};
+        }
+        int[] ld = diameter_btr_edges(node.left);
+        int[] rd = diameter_btr_edges(node.right);
+        int[] myAns = new int[2];
+        myAns[0] = Math.max(Math.max(ld[0], rd[0]), ld[1] + rd[1] + 2);
+        myAns[1] = Math.max(ld[1], rd[1]) + 1;
+        return myAns;
+    }
+    
+    public static int[] diameter_btr_nodes(Node node) {     //  in terms of nodes
+        if (node == null) {
+            return new int[]{0, 0};
+        }
+        int[] ld = diameter_btr_nodes(node.left);
+        int[] rd = diameter_btr_nodes(node.right);
+        int[] myAns = new int[2];
+        myAns[0] = Math.max(Math.max(ld[0], rd[0]), ld[1] + rd[1] + 1);
+        myAns[1] = Math.max(ld[1], rd[1]) + 1;
+        return myAns;
+    }
+
+    public static int MaxSum = 0;
+    public static int leafToLeafSum(Node node) {        //  leaf to leaf largest sum(path starts from one leaf and ends to other5)
+        if (node == null) {
+            return Integer.MIN_VALUE;
+        }
+        if (node.left == null && node.right == null) {
+            return node.data;
+        }
+        int lMaxSum = leafToLeafSum(node.left);
+        int rMaxSum = leafToLeafSum(node.right);
+        if (node.left != null && node.right != null) {
+            MaxSum = Math.max(MaxSum, lMaxSum + rMaxSum + node.data);
+        }
+        return Math.max(lMaxSum, rMaxSum) + node.data;
+    }
+
     public static void displayNodeList(ArrayList<Node> arr) {
         for (Node n : arr) {
             System.out.print(n.data + " ");
         }
         System.out.println();
     }
+
+    //  ==============================================================================================================================================================
+    /**
+     * BST
+     */
+    public static Node makeBST(int[] arr, int si, int ei) {
+        if (si > ei) {
+            return null;
+        }
+        int mid = (si + ei) >> 1;
+        Node node = new Node(arr[mid]);
+        node.left = makeBST(arr, si, mid - 1);
+        node.right = makeBST(arr, mid + 1, ei);
+        return node;
+    }
+
+    public static boolean findInBST(Node node, int data) {
+        if (node == null) {
+            return false;
+        }
+        if (node.data == data) {
+            return true;
+        }
+        if (data < node.data) {
+            return findInBST(node.left, data);
+        } else {
+            return findInBST(node.right, data);
+        }
+    }
+    
+    //  ==============================================================================================================================================================
     
     public static void solve() {
         int[] tree1 = {
@@ -208,12 +290,27 @@ public class binTree {
             110, 140, 139, -1, 142, 146, -1, -1, -1, 141, 143, 147, -1, -1, 148, -1, -1, -1, -1, 90, 
             191, -1, -1, 180, 190, -1, -1, 200, -1, -1
         };
-        Node root = createTree(tree3);
+        Node root = createTree(tree1);
         // System.out.println(root);
         // displayNodeList(rootToNodePath(root, 100));
         // System.out.println(LowestCommAnces(root, 100, 110).data);
         // K_Away(root, 110, 4);
-        K_Away_btr(root, 110, 4);
+        // K_Away_btr(root, 110, 4);
+        // System.out.println(diameter(root));
+        // System.out.println(diameter_btr_edges(root)[0]);
+        // System.out.println(diameter_btr_nodes(root)[0]);
+        // leafToLeafSum(root);    System.out.println(MaxSum);
+
+        /**
+         * BST
+         */
+        int[] arr = new int[10];
+        for (int i = 0; i < 10; i++) {
+            arr[i] = (i + 1) * 10;
+        }
+        Node bst = makeBST(arr, 0, arr.length - 1);
+        System.out.println(bst);
+        System.out.println(findInBST(bst, 80));
     }
 
     public static void main(String[] args) {
