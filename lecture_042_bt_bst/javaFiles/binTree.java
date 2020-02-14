@@ -301,11 +301,12 @@ public class binTree {
         return node;
     }
 
-    public static class allSol {
+    //  for all solutions of height, size, find, pred, succ, ceil, floor
+    public static class AllSol {
         int height = -1;
         int size = 0;
         boolean find = false;
-        int diameter = 0;
+        // int diameter = 0;    //  not possible in allSolution()
         
         Node pred = null;
         Node succ = null;
@@ -313,6 +314,151 @@ public class binTree {
 
         int ceil = Integer.MAX_VALUE;
         int floor = Integer.MIN_VALUE;
+    }
+
+    public static void allSolution(Node node, int data, int level, AllSol pair) {
+        if (node == null) {
+            return;
+        }
+        pair.height = Math.max(pair.height, level);
+        pair.size++;
+        pair.find = pair.find || node.data == data;
+        if (node.data > data && node.data < pair.ceil) {
+            pair.ceil = node.data;
+        }
+        if (node.data < data && node.data > pair.floor) {
+            pair.floor = node.data;
+        }
+        allSolution(node.left, data, level + 1, pair);
+        if (node.data == data) {
+            pair.pred = pair.prev;
+        } else if (pair.prev != null && pair.succ == null && pair.prev.data == data) {
+            pair.succ = node;
+        }
+        pair.prev = node;
+        allSolution(node.right, data, level + 1, pair);
+    }
+
+    public static int minInTree(Node node) {
+        if (node == null) {
+            return Integer.MAX_VALUE;
+        }
+        Node rnode = node;
+        while (node.left != null) {
+            rnode = rnode.left;
+        }
+        return node.data;
+    }
+
+    public static int maxInTree(Node node) {
+        if (node == null) {
+            return Integer.MIN_VALUE;
+        }
+        Node rnode = node;
+        while (node.right != null) {
+            rnode = rnode.right;
+        }
+        return node.data;
+    }
+
+    public static Node removeNode(Node node, int data) {
+        if (node == null) {
+            return null;
+        }
+        if (node.data == data) {
+            if (node.left == null || node.right == null) {
+                return (node.left == null) ? node.right : node.left;
+            }
+            int maxData = maxInTree(node.left);
+            node.data = maxData;
+            node.left = removeNode(node.left, maxData);
+        } else if (data < node.data) {
+            removeNode(node.left, data);
+        } else {
+            removeNode(node.right, data);
+        }
+        return node;
+    }
+
+    //  ========== morris traversal ==========
+    public static Node rightmostOfLeft(Node leftNode, Node curr) {
+        while (leftNode.right != null && leftNode.right != curr) {
+            leftNode = leftNode.right;
+        }
+        return leftNode;
+    }
+
+    public static void morrisInOrder(Node node) {
+        Node curr = node;
+        while (curr != null) {
+            Node nextLeft = curr.left;
+            if (nextLeft == null) {
+                System.out.print(curr.data + " ");
+                curr = curr.right;
+            } else {
+                Node rightMost = rightmostOfLeft(nextLeft, curr);
+                if (rightMost.right == null) {
+                    rightMost.right = curr;     //  create thread
+                    curr = curr.left;
+                } else {
+                    System.out.print(curr.data + " ");
+                    rightMost.right = null;     //  break thread
+                    curr = curr.right;
+                }
+            }
+        }
+    }
+
+    public static void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        System.out.print(node.data + " ");
+        inOrder(node.right);
+    }
+    
+    public static void morrisPreOrder(Node node) {
+        Node curr = node;
+        while (curr != null) {
+            Node nextLeft = curr.left;
+            if (nextLeft == null) {
+                System.out.print(curr.data + " ");
+                curr = curr.right;
+            } else {
+                Node rightMost = rightmostOfLeft(nextLeft, curr);
+                if (rightMost.right == null) {
+                    System.out.print(curr.data + " ");
+                    rightMost.right = curr;     //  create thread
+                    curr = curr.left;
+                } else {
+                    rightMost.right = null;     //  break thread
+                    curr = curr.right;
+                }
+            }
+        }
+    }
+
+    public static void preOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.data + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    //  ======= iteration class ======
+    class Tpair {
+        Node node;
+        boolean sd = false, ld = false, rd = false;
+        Tpair(Node node) {
+            this.node = node;
+        }
+    }
+
+    public static void itrPreOrder(Node node) {
+        
     }
     
     //  =============================================================================================================================
@@ -349,10 +495,19 @@ public class binTree {
         }
         Node bst = makeBST(arr, 0, arr.length - 1);
         // System.out.println(bst);
-        addNode(bst, 9999);
-        System.out.println(bst);
+        // addNode(bst, 9999);
+        // System.out.println(bst);
         // System.out.println(findInBST(bst, 80));
         // System.out.println(findInBST_noRec(bst, 80));
+        morrisInOrder(bst);
+        System.out.println();
+        inOrder(bst);
+        System.out.println();
+        morrisPreOrder(bst);
+        System.out.println();
+        preOrder(bst);
+        System.out.println();
+        // System.out.println(bst);
     }
 
     public static void main(String[] args) {
