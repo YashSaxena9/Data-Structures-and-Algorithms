@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Stack;
 public class binTree {
     public static class Node {
         int data;
@@ -251,7 +252,7 @@ public class binTree {
     /**
      * BST
      */
-    public static Node makeBST(int[] arr, int si, int ei) {
+    public static Node makeBST(int[] arr, int si, int ei) {     // uses in order
         if (si > ei) {
             return null;
         }
@@ -447,9 +448,18 @@ public class binTree {
         preOrder(node.left);
         preOrder(node.right);
     }
+    
+    public static void postOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.data + " ");
+    }
 
     //  ======= iteration class ======
-    class Tpair {
+    static class Tpair {
         Node node;
         boolean sd = false, ld = false, rd = false;
         Tpair(Node node) {
@@ -457,8 +467,79 @@ public class binTree {
         }
     }
 
+    public static void itrInOrder(Node node) {
+        Stack<Tpair> st = new Stack<>();
+        st.add(new Tpair(node));
+        while (st.size() != 0) {
+            Tpair topNode = st.peek();
+            if (!topNode.ld) {
+                topNode.ld = true;
+                if (topNode.node.left != null) {
+                    st.add(new Tpair(topNode.node.left));
+                }
+            } else if (!topNode.sd) {
+                System.out.print(topNode.node.data + " ");
+                topNode.sd = true;
+            } else if (!topNode.rd) {
+                topNode.rd = true;
+                if (topNode.node.right != null) {
+                    st.add(new Tpair(topNode.node.right));
+                }
+            } else {
+                st.pop();
+            }
+        }
+        return;
+    }
+
     public static void itrPreOrder(Node node) {
-        
+        Stack<Tpair> st = new Stack<>();
+        st.add(new Tpair(node));
+        while (st.size() != 0) {
+            Tpair topNode = st.peek();
+            if (!topNode.sd) {
+                System.out.print(topNode.node.data + " ");
+                topNode.sd = true;
+            } else if (!topNode.ld) {
+                topNode.ld = true;
+                if (topNode.node.left != null) {
+                    st.add(new Tpair(topNode.node.left));
+                }
+            } else if (!topNode.rd) {
+                topNode.rd = true;
+                if (topNode.node.right != null) {
+                    st.add(new Tpair(topNode.node.right));
+                }
+            } else {
+                st.pop();
+            }
+        }
+        return;
+    }
+
+    public static void itrPostOrder(Node node) {
+        Stack<Tpair> st = new Stack<>();
+        st.add(new Tpair(node));
+        while (st.size() != 0) {
+            Tpair topNode = st.peek();
+            if (!topNode.ld) {
+                topNode.ld = true;
+                if (topNode.node.left != null) {
+                    st.add(new Tpair(topNode.node.left));
+                }
+            } else if (!topNode.rd) {
+                topNode.rd = true;
+                if (topNode.node.right != null) {
+                    st.add(new Tpair(topNode.node.right));
+                }
+            } else if (!topNode.sd) {
+                System.out.print(topNode.node.data + " ");
+                topNode.sd = true;
+            } else {
+                st.pop();
+            }
+        }
+        return;
     }
     
     //  =============================================================================================================================
@@ -499,15 +580,20 @@ public class binTree {
         // System.out.println(bst);
         // System.out.println(findInBST(bst, 80));
         // System.out.println(findInBST_noRec(bst, 80));
-        morrisInOrder(bst);
-        System.out.println();
-        inOrder(bst);
-        System.out.println();
-        morrisPreOrder(bst);
-        System.out.println();
-        preOrder(bst);
-        System.out.println();
+        // morrisInOrder(bst);
+        // System.out.println();
+        // inOrder(bst);
+        // System.out.println();
+        // morrisPreOrder(bst);
+        // System.out.println();
+        // preOrder(bst);
+        // System.out.println();
         // System.out.println(bst);
+        // itrPreOrder(bst);
+        // itrInOrder(bst);
+        postOrder(bst);
+        System.out.println();
+        itrPostOrder(bst);
     }
 
     public static void main(String[] args) {
