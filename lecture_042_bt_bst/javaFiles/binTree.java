@@ -374,9 +374,9 @@ public class binTree {
             node.data = maxData;
             node.left = removeNode(node.left, maxData);
         } else if (data < node.data) {
-            removeNode(node.left, data);
+            node.left = removeNode(node.left, data);
         } else {
-            removeNode(node.right, data);
+            node.right = removeNode(node.right, data);
         }
         return node;
     }
