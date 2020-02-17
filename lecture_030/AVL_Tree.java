@@ -12,7 +12,7 @@ public class AVL_Tree {
 		private Node right = null;
 
 		private int balance = 0;
-		private int height = -1;			//  default height for a null node
+		private int height = -1;			//  default height for a null node is -1, for leaf node = 0
 		private int freq = 1;
 
 		Node(int data) {
@@ -204,19 +204,25 @@ public class AVL_Tree {
 		return node;
 	}
 	public static void main(String[] args) {
-		int[] arr = {10,20,30,40,50,60,70,80,90,100,110,120,130,140};
-		AVL_Tree(arr);
+		// int[] arr = {10,20,30,40,50,60,70,80,90,100,110,120,130,140};
+		// AVL_Tree(arr);
+		// display(root);
+		// System.out.println();
+		// addNode(root, 150);
+		// addNode(root, 180);
+		// display(root);
+		// System.out.println();
+		// delNode(root, 180);
+		// delNode(root, 150);
+		// delNode(root, 100);
+		// delNode(root, 80);
+		// delNode(root, 90);
+
+		Node root = null;
+		for (int i = 1; i <= 20; i++) {
+			root = addNode(root, i * 10);
+		}
 		display(root);
-		System.out.println();
-		addNode(root, 150);
-		addNode(root, 180);
-		display(root);
-		System.out.println();
-		delNode(root, 180);
-		delNode(root, 150);
-		delNode(root, 100);
-		delNode(root, 80);
-		delNode(root, 90);
-		display(root);
+		System.out.println(root.data);
 	}
 }
