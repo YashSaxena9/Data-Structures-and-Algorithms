@@ -5,13 +5,11 @@ import java.util.Stack;
  */
 public class avlTree {
     public static class Node {
-        int data;
-        Node left;
-        Node right;
+        int data = 0;
+        Node left = null;
+        Node right = null;
 
-        int height = 0;    //  for avl
-        //  default height is not -1 because a new node is a leaf node and has height 0
-        //  -1 is for null nodes
+        int height = 0;
         int bal = 0;        //  for avl
 
         public Node() {
@@ -60,6 +58,8 @@ public class avlTree {
         //     }
         //     return str.toString();
         // }
+
+
         @Override
         public String toString() {
             String str = "";
@@ -86,6 +86,7 @@ public class avlTree {
         idx++;
         node.left = createTree(preOrd);
         node.right = createTree(preOrd);
+
         return node;
     }
 
@@ -97,6 +98,8 @@ public class avlTree {
         Node node = new Node(inOrd[mid]);
         node.left = makeBST(inOrd, si, mid - 1);
         node.right = makeBST(inOrd, mid + 1, ei);
+
+        node=rotate(node);
         return node;
     }
 
@@ -142,8 +145,8 @@ public class avlTree {
         } else {
             node.right = addNode(node.right, data);
         }
-        node = rotate(node);
-        return node;
+        return rotate(node);
+        
     }
     
     //  modified for avl
@@ -190,7 +193,7 @@ public class avlTree {
     }
 
     private static void updateHeightBalance(Node node) {
-        if (node == null)   return;
+        // if (node == null)   return;
         int lh = -1, rh = -1;       //  default value if nodes are null
         if (node.left != null) {
             lh = node.left.height;
@@ -204,19 +207,19 @@ public class avlTree {
 
     public static Node rotate(Node node) {
         updateHeightBalance(node);
-        if (node.bal > 1) {                                   // if (node.bal == 2) {
-            if (node.left.bal > 0) {                          // if (node.left.bal == 1) {
-                node = ll(node);
-            } else if (node.left.bal < 0) {                   // } else if (node.left.bal == -1) {
+        if (node.bal == 2) {                                   // if (node.bal == 2) {
+            if (node.left.bal == 1) {                          // if (node.left.bal == 1) {
+                return ll(node);
+            } else {                   // } else if (node.left.bal == -1) {
                 node.left = rr(node.left);
-                node = ll(node);
+                return ll(node);
             }
-        } else if (node.bal < -1) {                           // } else if (node.bal == -2) {
-            if (node.right.bal < 0) {                         // if (node.right.bal == -1) {
-                node = rr(node);
-            } else if (node.right.bal > 0) {                  // } else if (node.right.bal == 1) {
+        } else if (node.bal == -2) {                           // } else if (node.bal == -2) {
+            if (node.right.bal == -1) {                         // if (node.right.bal == -1) {
+                return rr(node);
+            } else  {                  // } else if (node.right.bal == 1) {
                 node.right = ll(node.right);
-                node = rr(node);
+                return rr(node);
             }
         }
         return node;
@@ -224,13 +227,15 @@ public class avlTree {
     
     //  =================== main =====================================
     public static void solve() {
-        Node root = null;
+        // int[] arr = {10};
+        // Node root = makeBST(arr, 0, 0);
+        Node root=null;
         for (int i = 1; i <= 20; i++) {
-            root = addNode(root, i);
+            root = addNode(root, i * 10);
         }
         // System.out.println(root);
         display(root);
-        System.out.println(root);
+        // System.out.println(root);
     }
     public static void main(String[] args) {
         solve();
