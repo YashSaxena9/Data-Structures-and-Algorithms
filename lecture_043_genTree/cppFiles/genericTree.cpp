@@ -387,5 +387,8 @@ void solve() {
 
 int main(int args, char**argv) {
     solve();
+    int i =10;
+    int &ref = i;
+    cout << &i << " " << &ref << endl;
     return 0;
 }
