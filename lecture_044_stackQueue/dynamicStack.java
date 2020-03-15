@@ -1,5 +1,4 @@
 public class dynamicStack extends stack {
-
     dynamicStack() {
         super();
     }
@@ -37,5 +36,4 @@ public class dynamicStack extends stack {
         System.out.println(b);
         System.out.println("hello Dynamic Stack");
     }
-
 }
