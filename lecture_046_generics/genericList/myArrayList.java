@@ -126,13 +126,27 @@ public class myArrayList<E> implements List<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		// Iterator<Object> it = c.iterator();
-		return false;
+		Object[] toAdd = c.toArray();
+		if (toAdd.length + this.endIdx + 1 >= this.capacity) {
+			grow(toAdd.length + this.endIdx + 2);
+		}
+		for (int i = 0; i < toAdd.length; i++) {
+			this.dataArray[++this.endIdx] = toAdd[i];
+		}
+		System.gc();
+		return true;
 	}
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		// TODO Auto-generated method stub
+		Object[] toAdd = c.toArray();
+		if (toAdd.length + this.endIdx + 1 >= this.capacity) {
+			grow(toAdd.length + this.endIdx + 2);
+		}
+		for (int i = 0; i < toAdd.length; i++) {
+			this.dataArray[++this.endIdx] = toAdd[i];
+		}
+		System.gc();
 		return false;
 	}
 
