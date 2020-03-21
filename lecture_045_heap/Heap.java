@@ -2,16 +2,39 @@ import java.util.ArrayList;
 
 public class Heap {
     private ArrayList<Integer> arr;
+    private boolean isMax;  //  default is false (Min heap by default)
 
     public Heap() {
         this.arr = new ArrayList<>();
+        this.isMax = false;
     }
-
+    
     public Heap(int size) {
         this.arr = new ArrayList<>(size);
+        this.isMax = false;
+    }
+    
+    public Heap(int size, boolean isMax) {
+        this.arr = new ArrayList<>(size);
+        this.isMax = isMax;         //  if isMax is true then its maxHeap
+    }
+
+    public Heap(boolean isMax) {
+        this.arr = new ArrayList<>();
+        this.isMax = isMax;         //  if isMax is true then its maxHeap
+    }
+
+    public Heap(int[] arr, boolean isMax) {
+        this.isMax = isMax;
+        createHeap(arr);
     }
 
     public Heap(int[] arr) {
+        this.isMax = false;
+        createHeap(arr);
+    }
+    
+    private void createHeap(int[] arr) {
         this.arr = new ArrayList<>(arr.length);
         for (int i = 0; i < arr.length; i++) {
             this.arr.add(arr[i]);
@@ -50,24 +73,24 @@ public class Heap {
     }
 
     private void downHeapify(int idx) {
-        int maxIdx = idx;
+        int currIdx = idx;
         int lci = 2 * idx + 1;
         int rci = 2 * idx + 2;
-        if (lci < arr.size() && arr.get(lci) > arr.get(maxIdx)) {
-            maxIdx = lci;
+        if (lci < arr.size() && compareTo(arr.get(lci), arr.get(currIdx)) > 0) {
+            currIdx = lci;
         }
-        if (rci < arr.size() && arr.get(rci) > arr.get(maxIdx)) {
-            maxIdx = rci;
+        if (rci < arr.size() && compareTo(arr.get(rci), arr.get(currIdx)) > 0) {
+            currIdx = rci;
         }
-        if (maxIdx != idx) {
-            swap(maxIdx, idx);
-            downHeapify(maxIdx);
+        if (currIdx != idx) {
+            swap(currIdx, idx);
+            downHeapify(currIdx);
         }
     }
 
     private void upHeapify(int cidx) {
         int pidx = (cidx - 1) >> 1;
-        if (pidx >= 0 && arr.get(pidx) < arr.get(cidx)) {
+        if (pidx >= 0 && compareTo(arr.get(cidx), arr.get(pidx)) > 0) {
             swap(pidx, cidx);
             upHeapify(pidx);
         }
@@ -79,6 +102,14 @@ public class Heap {
     }
 
     public int pop() {
+        if (arr.size() == 0) {
+            System.err.println("UnderFlow, no data present");
+            System.err.println("Heap is empty, cannot perform pop() operation");
+            return 0;
+        }
+        if (arr.size() == 1) {
+            return arr.remove(0);
+        }
         int val = arr.get(0);
         arr.set(0, arr.remove(arr.size() - 1));
         downHeapify(0);
@@ -86,12 +117,21 @@ public class Heap {
     }
 
     public void update(int idx, int data) {
+        if (idx < 0 || idx >= this.arr.size()) {
+            System.err.println("Heap Index outofBound");
+            return;
+        }
         arr.set(idx, data);
         upHeapify(idx);
         downHeapify(idx);
     }
 
     public int top() {
+        if (arr.size() == 0) {
+            System.err.println("UnderFlow, no data present");
+            System.err.println("Heap is empty, cannot perform top() operation");
+            return 0;
+        }
         return arr.get(0);
     }
 
@@ -101,5 +141,15 @@ public class Heap {
 
     public boolean isEmpty() {
         return arr.size() == 0;
+    }
+
+    private int compareTo(int toChoose, int notToChoose) {
+        if (this.isMax) {
+            // return toChoose > notToChoose;   //  choose "toChoose" (maxHeap)
+            return toChoose - notToChoose;    //  equivalent to above line 
+        } else {
+            // return toChoose < notToChoose;   //  choose "toChoose" (minHeap)
+            return notToChoose - toChoose;    //  equivalent to above line 
+        }
     }
 }
