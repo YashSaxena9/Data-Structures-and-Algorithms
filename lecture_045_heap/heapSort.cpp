@@ -30,7 +30,7 @@ void heapSort(vector<int>& arr, bool inInc = true) {
     bool isMax = inInc;
     int n = arr.size() - 1;
     for (int i = n; i >= 0; i--) {
-        downHeapify(arr, i, n, isMax);
+        downHeapify(arr, i, n + 1, isMax);
     }
     // for (int ele : arr) {
     //     cout << ele << " ";
