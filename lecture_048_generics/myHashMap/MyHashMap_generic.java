@@ -1,13 +1,14 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
 
-public class MyHashMap {
+@SuppressWarnings("unchecked")
+public class MyHashMap_generic<K, V> {
 
     private class Node {
-        int key;
-        int value;
+        K key;
+        V value;
 
-        public Node(int key, int value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -23,12 +24,12 @@ public class MyHashMap {
     // @SuppressWarnings("unchecked")
     private LinkedList<Node>[] buckets;     //  default size == 10
     
-    public MyHashMap() {
+    public MyHashMap_generic() {
         this(10);
     }
 
-    @SuppressWarnings("unchecked")
-    public MyHashMap(int groupSize) {
+    // @SuppressWarnings("unchecked")
+    public MyHashMap_generic(int groupSize) {
         this.buckets = new LinkedList[groupSize];
         /*  !!!!  already handled in put() function  !!!!
          *  for (int i = 0; i < this.buckets.length; i++) {
@@ -38,11 +39,11 @@ public class MyHashMap {
         this.size = 0;
     }
     
-    public int myGroup(Integer key) {
+    public int myGroup(K key) {
         return myHashCode(key) % buckets.length;
     }
 
-    public int myHashCode(Integer key) {
+    public int myHashCode(K key) {
         return Math.abs(key.hashCode());
     }
 
@@ -66,7 +67,7 @@ public class MyHashMap {
         return str.toString();
     }
 
-    private Node getNodeUtil(int key) {
+    private Node getNodeUtil(K key) {
         int code = myGroup(key);
         if (buckets[code] == null) {
             buckets[code] = new LinkedList<>();
@@ -82,7 +83,7 @@ public class MyHashMap {
      *      group = new LinkedList<>();
      *  }
     */
-    public void put(int key, int value) {
+    public void put(K key, V value) {
         int code = myGroup(key);
         if (buckets[code] == null) {
             buckets[code] = new LinkedList<>();
@@ -103,7 +104,7 @@ public class MyHashMap {
         }
     }
     
-    private Node searchInGroup(LinkedList<Node> group, int key) {
+    private Node searchInGroup(LinkedList<Node> group, K key) {
         if (group == null) {
             return null;
         }
@@ -120,16 +121,16 @@ public class MyHashMap {
         return node;
     }
 
-    private Integer getNodeValue(int key) {
+    private V getNodeValue(K key) {
         Node rn = getNodeUtil(key);
         return (rn == null) ? null : rn.value;
     }
     
-    public Integer get(int key) {
+    public V get(K key) {
         return getNodeValue(key);
     }
     
-    public Integer remove(int key) {
+    public V remove(K key) {
         int code = myGroup(key);
         LinkedList<Node> group = buckets[code];
         Node rn = searchInGroup(group, key);
@@ -143,7 +144,7 @@ public class MyHashMap {
         return rn.value;
     }
 
-    public boolean containsKey(int key) {
+    public boolean containsKey(K key) {
         // int code = myGroup(key);
         // LinkedList<Node> group = buckets[code];
         // Node rn = searchInGroup(group, key);
@@ -151,11 +152,11 @@ public class MyHashMap {
         return getNodeUtil(key) != null;
     }
 
-    public Integer[] keyArray() {
+    public K[] keyArray() {
         if (this.size == 0) {
-            return new Integer[0];
+            return (K[])new Object[0];
         }
-        Integer[] keys = new Integer[this.size];
+        Object[] keys = new Object[this.size];
         int i = 0;
         for (LinkedList<Node> ll : buckets) {
             if (ll == null) {
@@ -169,14 +170,14 @@ public class MyHashMap {
                 }
             }
         }
-        return keys;
+        return (K[])keys;
     }
 
-    public ArrayList<Integer> keyList() {
+    public ArrayList<K> keyList() {
         if (this.size == 0) {
             return new ArrayList<>();
         }
-        ArrayList<Integer> keys = new ArrayList<>();
+        ArrayList<K> keys = new ArrayList<>();
         for (LinkedList<Node> ll : buckets) {
             if (ll == null) {
                 continue;
@@ -230,7 +231,7 @@ public class MyHashMap {
         }
     }
 
-    public Integer getOrDefault(int key, int def_Value) {
+    public V getOrDefault(K key, V def_Value) {
         Node rn = getNodeUtil(key);
         if (rn == null) {
             return def_Value;
@@ -238,7 +239,7 @@ public class MyHashMap {
         return rn.value;
     }
 
-    public Integer putIfAbsent(int key, int value) {
+    public V putIfAbsent(K key, V value) {
         int code = myGroup(key);
         if (buckets[code] == null) {
             buckets[code] = new LinkedList<>();
