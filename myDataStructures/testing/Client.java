@@ -23,13 +23,15 @@ public class Client {
         // System.out.println(tree);
         // Pair<String, Boolean> p1 = new Pair<>("yash", null);
         // System.out.println(p1);
-        Pair<myClass2, Integer> p2 = new Pair<>(new myClass2(10), null, new Comparator<myClass2>() {
-            @Override
-            public int compare(myClass2 t, myClass2 o) {
-                return t.i - o.i;
-            }
-        });
+        Pair<myClass2, Integer> p2 = new Pair<>(new myClass2(10), null);
+        // Pair<myClass2, Integer> p2 = new Pair<>(new myClass2(10), null, new Comparator<Pair<myClass2, Integer>>() {
+        //     @Override
+        //     public int compare(Pair<myClass2, Integer> t, Pair<myClass2, Integer> o) {
+        //         return t.first.i - o.first.i;
+        //     }
+        // });
         Pair<myClass2, Integer> p3 = new Pair<>(new myClass2(), null);
+        System.out.println(p2.hashCode() + " " + p3.hashCode());
         System.out.println(p2.compareTo(p3));
         System.out.println(p2);
         // ArrayList arr = new ArrayList();
@@ -76,14 +78,17 @@ public class Client {
         System.out.println(pp2.compareTo(pp1));
 
         //  -----------------------
-        Pair<myClass2, Integer> pp1_ = new Pair<>(new myClass2(9), 1234);
-        Pair<myClass2, Integer> pp2_ = new Pair<>(new myClass2(10), 1234, new Comparator<myClass2>() {
+        Pair<myClass2, Integer> pp1_ = new Pair<>(new myClass2(9), 1234, (Pair<myClass2, Integer> a, Pair<myClass2, Integer> b)->(
+            (int)(a.second.compareTo(b.second))
+        ));
+        Pair<myClass2, Integer> pp2_ = new Pair<>(new myClass2(10), 1234, new Comparator<Pair<myClass2, Integer>>() {
             @Override
-            public int compare(myClass2 t, myClass2 o) {
-                return t.i - o.i;
+            public int compare(Pair<myClass2, Integer> t, Pair<myClass2, Integer> o) {
+                return t.first.i - o.first.i;
             }
         });
         System.out.println(pp2_.compareTo(pp1_));
+        System.out.println(pp1_.compareTo(pp2_));
         // System.out.println(pp1_.compareTo(pp2_));    //  error
         myClass2 c1 = new myClass2(55);
         // Comparable<myClass2> comp = (Comparable<myClass2>) c1;      //  invalid typecast, run time error
