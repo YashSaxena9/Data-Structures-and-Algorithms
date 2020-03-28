@@ -215,7 +215,6 @@ public class MyHashMap_generic<K, V> {
         this.size = 0;
     }
 
-    @SuppressWarnings("unchecked")
     private void rehash() {
         LinkedList<Node> oldBuckets[] = this.buckets;
         this.buckets = new LinkedList[oldBuckets.length * 2];
