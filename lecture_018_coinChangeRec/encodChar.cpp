@@ -1,3 +1,0 @@
-//  encode character
-#include<iostream>
-#

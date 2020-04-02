@@ -76,7 +76,7 @@ int mazePathHV_03(int sr, int sc, int er, int ec) {     //  mirror case is usele
             dp[sr][sc] = count;     //  save dp
         }
     }
-    // display(dp);
+    display(dp);
     return dp[0][0];
 }
 
@@ -235,24 +235,24 @@ int mazePathHVD_multi_03(int sr, int sc, int er, int ec) {     //  mirror case i
 
 void solve() {
     int rSize = 3, cSize = 3;
-    vii dp1(rSize, vi(cSize, 0));
-    cout << mazePathHV_01(0, 0, rSize - 1, cSize - 1) << endl;
-    cout << mazePathHV_02(0, 0, rSize - 1, cSize - 1, dp1) << endl;
+    // vii dp1(rSize, vi(cSize, 0));
+    // cout << mazePathHV_01(0, 0, rSize - 1, cSize - 1) << endl;
+    // cout << mazePathHV_02(0, 0, rSize - 1, cSize - 1, dp1) << endl;
     cout << mazePathHV_03(0, 0, rSize - 1, cSize - 1) << endl;
     // display(dp1);
-    cout << "end" << endl;
-    vii dp2(rSize, vi(cSize, 0));
-    cout << mazePathHVD_01(0, 0, rSize - 1, cSize - 1) << endl;
-    cout << mazePathHVD_02(0, 0, rSize - 1, cSize - 1, dp2) << endl;
-    cout << mazePathHVD_03(0, 0, rSize - 1, cSize - 1) << endl;
+    // cout << "end" << endl;
+    // vii dp2(rSize, vi(cSize, 0));
+    // cout << mazePathHVD_01(0, 0, rSize - 1, cSize - 1) << endl;
+    // cout << mazePathHVD_02(0, 0, rSize - 1, cSize - 1, dp2) << endl;
+    // cout << mazePathHVD_03(0, 0, rSize - 1, cSize - 1) << endl;
     // display(dp2);
-    cout << "end" << endl;
-    vii dp3(rSize, vi(cSize, 0));
-    cout << mazePathHVD_multi_01(0, 0, rSize - 1, cSize - 1) << endl;
-    cout << mazePathHVD_multi_02(0, 0, rSize - 1, cSize - 1, dp3) << endl;
-    cout << mazePathHVD_multi_03(0, 0, rSize - 1, cSize - 1) << endl;
+    // cout << "end" << endl;
+    // vii dp3(rSize, vi(cSize, 0));
+    // cout << mazePathHVD_multi_01(0, 0, rSize - 1, cSize - 1) << endl;
+    // cout << mazePathHVD_multi_02(0, 0, rSize - 1, cSize - 1, dp3) << endl;
+    // cout << mazePathHVD_multi_03(0, 0, rSize - 1, cSize - 1) << endl;
     // display(dp3);
-    cout << "end" << endl;
+    // cout << "end" << endl;
 }
 
 int main(int args, char**argv) {
