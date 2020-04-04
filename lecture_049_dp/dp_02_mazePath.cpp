@@ -1,3 +1,6 @@
+//  Maze path, find ways to reach destination from source in a maze
+//  moves allowed H, V and D   -->   (horizontal, vertical and diagonal)
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>

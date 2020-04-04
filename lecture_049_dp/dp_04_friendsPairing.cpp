@@ -1,3 +1,7 @@
+//  friends pairing problem GFG
+//  friends can stay in single or pair of two in group
+//  count number of ways to divide them in a group
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>

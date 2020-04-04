@@ -1,3 +1,8 @@
+//  find the best way to move in a matrix from left to right(matrix is filled with values and you only have certain direction of moves)
+//  the best way is where you get largest sum of numbers
+//  moves allowed :-
+//  right, upperright, lowerright  -->  {{1, 1}, {0, 1}, {-1, 1}};
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>

@@ -1,5 +1,5 @@
 //  coin change problem multi move permutation and combination by for loop solution(not subsequence solution)
-//  use coin change combination for solving equation -->  2x + 3y + 5z + 7p = 10
+//  ********** we can use coin change combination for solving equation -->  2x + 3y + 5z + 7p = 10 **********
 /* 
 solution :- 
     2 2 2 2 2   -> 2x  {x = 5}

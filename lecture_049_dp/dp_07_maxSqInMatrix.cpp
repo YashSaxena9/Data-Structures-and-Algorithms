@@ -1,3 +1,5 @@
+//  find size of maximum square of 1s forming in a board filled with 0s and 1s.
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>

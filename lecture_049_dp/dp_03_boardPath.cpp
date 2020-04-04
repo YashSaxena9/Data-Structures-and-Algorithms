@@ -1,3 +1,5 @@
+//  you are in a game board and have moves (using dice) to reach the end point
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>

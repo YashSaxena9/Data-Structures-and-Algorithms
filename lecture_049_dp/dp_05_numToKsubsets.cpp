@@ -1,3 +1,5 @@
+//  count number of ways to partition n numbers to k subsets
+
 #include <iostream>
 #include <vector>
 #define vi vector<int>
