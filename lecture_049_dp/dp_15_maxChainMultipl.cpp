@@ -30,6 +30,7 @@ void display(vector<vector<pair<int, string>>>& arr) {
     }
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, no dp
 int MCM_memo_01(vi& arr, int si, int ei) {
     if (si + 1 == ei) {
         return 0;
@@ -44,6 +45,7 @@ int MCM_memo_01(vi& arr, int si, int ei) {
     return myCost;
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, it also returns ans string of final form, no dp
 pair<int, string> MCM_withStr_01(vi& arr, int si, int ei) {
     if (si == ei - 1) {
         string str = string(1, ((char)(si + 'A')));
@@ -62,6 +64,7 @@ pair<int, string> MCM_withStr_01(vi& arr, int si, int ei) {
     return minAns;
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, with dp memorisation
 int MCM_memo_02(vi& arr, int si, int ei, vii& dp) {
     if (si + 1 == ei) {
         return 0;
@@ -79,6 +82,7 @@ int MCM_memo_02(vi& arr, int si, int ei, vii& dp) {
     return dp[si][ei] = myCost;
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, it also returns ans string of final form, with dp memorisation
 pair<int, string> MCM_withStr_02(vi& arr, int si, int ei, vector<vector<pair<int, string>>>& dp) {
     if (si == ei - 1) {
         string str = string(1, ((char)(si + 'A')));
@@ -100,6 +104,7 @@ pair<int, string> MCM_withStr_02(vi& arr, int si, int ei, vector<vector<pair<int
     return dp[si][ei] = minAns;
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, with dp tabulation
 int MCM_memo_03(vi& arr) {
     vii dp(arr.size(), vi(arr.size(), 0));
     for (int gap = 2; gap < arr.size(); gap++) {
@@ -118,6 +123,7 @@ int MCM_memo_03(vi& arr) {
     return dp[0][arr.size() - 1];
 }
 
+//  matrix chain multiplication, find minimum operation required to multiply all matrices, it also returns ans string of final form, with dp tabulation
 int MCM_withStr_03(vi& arr) {
     vii dp(arr.size(), vi(arr.size(), 0));
     vector<vector<string>> sdp(arr.size(), vector<string>(arr.size(), ""));
@@ -143,23 +149,27 @@ int MCM_withStr_03(vi& arr) {
     }
     display(dp);
     display(sdp);
+    cout << sdp[0][arr.size() - 1] << endl;
     return dp[0][arr.size() - 1];
 }
 
 void solve(vector<int>& arr) {
     // cout << MCM_memo_01(arr, 0, arr.size() - 1) << endl;
     
-    // vector<vector<pair<int, string>>> dp2(arr.size(), vector<pair<int, string>>(arr.size(), {0, ""}));
-    // pair<int, string> ans = MCM_withStr_02(arr, 0, arr.size() - 1, dp2);
-    // cout << ans.second << " -> " << ans.first << endl;
+    // pair<int, string> ans1 = MCM_withStr_01(arr, 0, arr.size() - 1);
+    // cout << ans1.second << " -> " << ans1.first << endl;
 
     // vii dp1(arr.size(), vi(arr.size(), 0));
     // cout << MCM_memo_02(arr, 0, arr.size() - 1, dp1) << endl;
     // display(dp1);
 
+    // vector<vector<pair<int, string>>> dp2(arr.size(), vector<pair<int, string>>(arr.size(), {0, ""}));
+    // pair<int, string> ans2 = MCM_withStr_02(arr, 0, arr.size() - 1, dp2);
+    // cout << ans2.second << " -> " << ans2.first << endl;
+
     // cout << MCM_memo_03(arr) << endl;
     
-    cout << MCM_withStr_03(arr) << endl;
+    // cout << MCM_withStr_03(arr) << endl;
 }
 
 int main(int args, char**argv) {

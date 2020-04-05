@@ -18,6 +18,7 @@ void display(vector<vector<int>>& arr) {
     }
 }
 
+//  fills a matrix with true for those substrings which are palindrome
 void fillPalindDp(string str, vector<vector<bool>>& dp) {
     for (int gap = 0; gap < str.size(); gap++) {
         for (int i = 0, j = gap; j < str.size(); i++, j++) {
@@ -34,6 +35,7 @@ void fillPalindDp(string str, vector<vector<bool>>& dp) {
     }
 }
 
+//  find minimum cuts required to make a string palindrome by recursion, no dp
 int minPalindCuts_01(int si, int ei, string str, vector<vector<bool>>& isPalind) {
     if (isPalind[si][ei]) {
         return 0;
@@ -49,6 +51,7 @@ int minPalindCuts_01(int si, int ei, string str, vector<vector<bool>>& isPalind)
     return minAns;
 }
 
+//  find minimum cuts required to make a string palindrome by recursion, with dp memorisation
 int minPalindCuts_02(int si, int ei, string str, vector<vector<bool>>& isPalind, vector<vector<int>>& dp) {
     if (isPalind[si][ei]) {
         return dp[si][ei] = 0;
@@ -66,6 +69,7 @@ int minPalindCuts_02(int si, int ei, string str, vector<vector<bool>>& isPalind,
     return dp[si][ei] = minAns;
 }
 
+//  find minimum cuts required to make a string palindrome (came up after studying recursion with dp memorisation), with dp tabulation
 int minPalindCuts_03(string str, vector<vector<bool>>& isPalind) {
     vector<vector<int>> dp(str.length(), vector<int>(str.length(), 0));
     for (int gap = 1; gap < str.length(); gap++) {
@@ -86,6 +90,8 @@ int minPalindCuts_03(string str, vector<vector<bool>>& isPalind) {
     display(dp);
     return dp[0][str.length() - 1];
 }
+
+//  ------------------------------------------------------------------------------------
 
 void solve(string str) {
     vector<vector<bool>> isPalind_dp(str.length(), vector<bool>(str.length(), false));
