@@ -25,37 +25,6 @@ void display(vii& arr) {
     }
 }
 
-bool palindromeSubstr_02(int si, int ei, string str, vii& dp) {
-    if (si >= ei) {
-        return dp[si][ei] = (si == ei) ? 1 : 0;
-    }
-    if (dp[si][ei] != 0) {
-        return dp[si][ei];
-    }
-    if (str[si] == str[ei] && ei - si == 1) {
-        dp[si][ei] = 2;
-    } else if (str[si] == str[ei]) {
-        dp[si][ei] = palindromeSubstr_02(si + 1, ei - 1, str, dp);
-        dp[si][ei] += (dp[si][ei] >= 0) ? 2 : 0;
-    } else {
-
-    }
-    return count;
-}
-
-int palindromeSubseq_02(int si, int ei, string str) {
-    if (si > ei) {
-        return 0;
-    }
-    if (si == ei ) {
-        return 1;
-    } else if (str[si] == str[ei]) {
-        return palindromeSubseq_02(si + 1, ei, str) + palindromeSubseq_02(si, ei - 1, str) + 1;
-    } else {
-        return palindromeSubseq_02(si + 1, ei, str) + palindromeSubseq_02(si, ei - 1, str) - palindromeSubseq_02(si + 1, ei - 1, str);
-    }
-}
-
 //  total palindromic substrings, with tabulation
 int totalPalindromeSubstr(string str) {
     vbb dp(str.length(), vb (str.length(), false));

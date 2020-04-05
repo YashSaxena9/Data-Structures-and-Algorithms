@@ -25,6 +25,7 @@ void display(vii& arr) {
     }
 }
 
+//  count all palindromic subsequences, no dp
 int totalPalindromicSubseq_01(int si, int ei, string str) {
     if (si > ei) {
         return 0;
@@ -43,6 +44,7 @@ int totalPalindromicSubseq_01(int si, int ei, string str) {
     }
 }
 
+//  count all palindromic subsequences, with dp memorisation
 int totalPalindromicSubseq_02(int si, int ei, string str, vii& dp) {
     if (si > ei) {
         return 0;
@@ -64,6 +66,7 @@ int totalPalindromicSubseq_02(int si, int ei, string str, vii& dp) {
     }
 }
 
+//  count all palindromic subsequences, with dp tabulaion
 int totalPalindromicSubseq_03(string str) {
     vii dp(str.length(), vi(str.length(), 0));
     for (int gap = 0; gap < str.length(); gap++) {
@@ -83,8 +86,8 @@ int totalPalindromicSubseq_03(string str) {
     return dp[0][str.length() - 1];
 }
 
-//  palindromic subsequences, with tabulation (no static like int, int vector dp)
-int longestPalindromeSubseq_03(string str) {
+//  give length of longest palindromic subsequence, with tabulation (no static like int, int vector dp)
+int longestPalindromeSubseq_01(string str) {
     vii dp(str.length(), vi (str.length(), 0));
     for (int gap = 0; gap < str.length(); gap++) {
         for (int i = 0, j = gap; j < str.length(); j++, i++) {
@@ -116,7 +119,7 @@ void solve() {
 
     cout << totalPalindromicSubseq_03(str5) << endl;
     
-    // cout << longestPalindromeSubseq_03(str5) << endl;
+    // cout << longestPalindromeSubseq_01(str5) << endl;
 }
 
 int main(int args, char**argv) {
