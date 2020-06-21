@@ -213,17 +213,7 @@ public class linkedList<E> {
     }
 
     private Node removeNodeAt(int idx) {
-        if (idx >= this.nodeCount) {
-            throw new NullPointerException();
-        }
-        if (idx == 0) {
-            return removeFirstNode();
-        }
-        Node prev = getNodeAt(idx - 1);
-        Node rn = prev.next;
-        prev.next = prev.next.next;
-        rn.next = null;
-        return rn;
+        c
     }
 
     //  others ============================
