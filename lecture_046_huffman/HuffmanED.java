@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -98,5 +99,18 @@ public class HuffmanED {
             }
         }
         return ans_Sb.toString();
+    }
+
+    /* --------------------------------------------------------------------- */
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        HuffmanED huff = new HuffmanED();
+        System.out.println(huff.encodeMap);
+        String str = scn.nextLine();
+        String encoded = huff.encode(str);
+        System.out.println(encoded);
+        System.out.println(huff.decode(encoded));
+        scn.close();
     }
 }
